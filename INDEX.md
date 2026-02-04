@@ -1,193 +1,197 @@
-# Fawkes - 完整资源索引
+# Fawkes - Complete Resource Index
 
-> 一站式查找所有文档、配置、示例
+> One-stop reference for all docs, configs, and examples
 
 ---
 
-## 📚 文档
+## 📚 Documentation
 
-### 核心文档
-| 文件 | 说明 |
-|------|------|
-| [docs/runbook/RUNBOOK.md](docs/runbook/RUNBOOK.md) | **主文档** - 技术栈、目录结构、命令规范 |
-| [docs/runbook/QUICK_START.md](docs/runbook/QUICK_START.md) | 30分钟快速搭建指南 |
-| [docs/runbook/AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md) | Agent协作最佳实践 |
-| [docs/runbook/DOCKER.md](docs/runbook/DOCKER.md) | Docker容器化开发指南 |
-| [docs/runbook/UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md) | UI开发工作流（v0.dev + Storybook） |
-| [docs/runbook/UI_DEVELOPMENT_CONFIG.md](docs/runbook/UI_DEVELOPMENT_CONFIG.md) | UI开发具体配置 |
+### Core Docs
+| File | Description |
+|------|-------------|
+| [docs/runbook/RUNBOOK.md](docs/runbook/RUNBOOK.md) | **Main doc** - Tech stack, structure, commands |
+| [docs/runbook/QUICK_START.md](docs/runbook/QUICK_START.md) | 30-minute quick setup guide |
+| [docs/runbook/AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md) | Agent collaboration best practices |
+| [docs/runbook/DOCKER.md](docs/runbook/DOCKER.md) | Docker containerization guide |
+| [docs/runbook/UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md) | UI workflow (v0.dev + Storybook) |
+| [docs/runbook/UI_DEVELOPMENT_CONFIG.md](docs/runbook/UI_DEVELOPMENT_CONFIG.md) | UI development configuration |
 
-### 参考资料
-| 文件 | 说明 |
-|------|------|
-| [docs/SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md) | Claude Code Skills使用指南 |
-| [docs/specs/todo-feature-spec.md](docs/specs/todo-feature-spec.md) | Feature Spec示例（Todo） |
+### References
+| File | Description |
+|------|-------------|
+| [docs/SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md) | Claude Code Skills usage guide |
+| [docs/specs/todo-feature-spec.md](docs/specs/todo-feature-spec.md) | Feature spec example (Todo) |
 
 ---
 
 ## 🛠️ Skills (Claude Code)
 
-### 自定义Skill
-| 文件 | 说明 |
-|------|------|
-| [skills/fawkes/SKILL.md](skills/fawkes/SKILL.md) | Fawkes主Skill |
-| [skills/fawkes/references/feature-spec-template.md](skills/fawkes/references/feature-spec-template.md) | Feature Spec模板 |
-| [skills/fawkes/references/ui-patterns.md](skills/fawkes/references/ui-patterns.md) | UI模式参考 |
-| [skills/fawkes/references/testing-guide.md](skills/fawkes/references/testing-guide.md) | 测试指南 |
+### Custom Skill
+| File | Description |
+|------|-------------|
+| [skills/fawkes/SKILL.md](skills/fawkes/SKILL.md) | Fawkes main skill |
+| [skills/fawkes/references/feature-spec-template.md](skills/fawkes/references/feature-spec-template.md) | Feature spec template |
+| [skills/fawkes/references/ui-patterns.md](skills/fawkes/references/ui-patterns.md) | UI patterns reference |
+| [skills/fawkes/references/testing-guide.md](skills/fawkes/references/testing-guide.md) | Testing guide |
 
-### 推荐的外部Skills
+### Recommended External Skills
 ```bash
-# Vercel Labs Skills（推荐）
+# Vercel Labs Skills (recommended)
 npx add-skill vercel-labs/agent-skills
 
-# 包含:
-# - react-best-practices (57条规则)
-# - web-design-guidelines (100+条规则)
-# - vercel-deploy-claimable (一键部署)
+# Includes:
+# - react-best-practices (57 rules)
+# - web-design-guidelines (100+ rules)
+# - vercel-deploy-claimable (one-click deploy)
 ```
 
 ---
 
-## 📦 代码结构
+## 📦 Code Structure
 
-### 前端
+### Frontend
 ```
 apps/
-├── web/                    # Next.js Web应用
+├── web/                    # Next.js web app
 │   └── src/
-│       ├── app/            # App Router页面
-│       ├── components/     # 组件
-│       ├── features/       # 功能模块
-│       └── lib/            # 工具函数
+│       ├── app/            # App Router pages
+│       ├── components/     # Components
+│       ├── features/       # Feature modules
+│       └── lib/            # Utilities
 │
-└── mobile/                 # Expo React Native应用
+└── mobile/                 # Expo React Native app
     └── src/
-        ├── app/            # Expo Router页面
-        ├── components/     # 组件
-        ├── features/       # 功能模块
-        └── lib/            # 工具函数
+        ├── app/            # Expo Router pages
+        ├── components/     # Components
+        ├── features/       # Feature modules
+        └── lib/            # Utilities
 ```
 
-### 共享包
+### Shared Packages
 ```
 packages/
-├── ui/                     # 跨平台UI组件
+├── ui/                     # Cross-platform UI components
 │   └── src/
-│       ├── primitives/     # 基础组件 (Button, Input等)
-│       └── lib/            # 工具函数
+│       ├── primitives/     # Base components (Button, Input, etc.)
+│       └── lib/            # Utilities
 │
-├── schemas/                # Zod Schemas (API契约)
+├── schemas/                # Zod Schemas (API contracts)
 │   └── src/
-│       ├── user.ts         # 用户相关
-│       └── todo.ts         # Todo示例
+│       ├── user.ts         # User related
+│       └── todo.ts         # Todo example
 │
-├── api-client/             # 类型安全API客户端
-└── config/                 # 共享配置
+├── api-client/             # Type-safe API client
+└── config/                 # Shared config
 ```
 
-### 后端
+### Backend
 ```
 services/
 └── backend/
     ├── src/
-    │   ├── handlers/       # Lambda入口（薄层）
-    │   ├── domain/         # 业务逻辑（厚层，可测试）
-    │   ├── data/           # 数据访问（Repository）
-    │   └── lib/            # 工具函数
+    │   ├── handlers/       # Lambda entry points (thin layer)
+    │   ├── domain/         # Business logic (thick layer, testable)
+    │   ├── data/           # Data access (Repository)
+    │   └── lib/            # Utilities
     └── test/
-        ├── unit/           # 单元测试
-        └── integration/    # 集成测试
+        ├── unit/           # Unit tests
+        └── integration/    # Integration tests
 ```
 
-### 基础设施
+### Infrastructure
 ```
 infra/
 └── cdk/
     ├── lib/
-    │   └── api-stack.ts    # API Stack定义
+    │   └── api-stack.ts    # API Stack definition
     └── bin/
-        └── app.ts          # CDK入口
+        └── app.ts          # CDK entry point
 ```
 
 ---
 
-## ⚙️ 配置文件
+## ⚙️ Config Files
 
-| 文件 | 说明 |
-|------|------|
-| [package.json](package.json) | 根配置，所有命令定义 |
-| [pnpm-workspace.yaml](pnpm-workspace.yaml) | Monorepo工作区 |
-| [turbo.json](turbo.json) | Turborepo配置 |
-| [docker-compose.yml](docker-compose.yml) | Docker服务定义 |
-| [.github/workflows/ci.yml](.github/workflows/ci.yml) | CI/CD配置 |
+| File | Description |
+|------|-------------|
+| [package.json](package.json) | Root config, all commands |
+| [pnpm-workspace.yaml](pnpm-workspace.yaml) | Monorepo workspace |
+| [turbo.json](turbo.json) | Turborepo config |
+| [docker-compose.yml](docker-compose.yml) | Docker service definitions |
+| [.github/workflows/ci.yml](.github/workflows/ci.yml) | CI/CD config |
 
 ---
 
-## 🚀 快速命令
+## 🚀 Quick Commands
 
 ```bash
-# 安装依赖
+# Install dependencies
 pnpm install
 
-# 开发
-pnpm dev              # 启动所有
-pnpm dev:web          # 只启动Web
-pnpm dev:mobile       # 只启动Mobile
-pnpm storybook        # 启动Storybook
+# Development
+pnpm dev              # Start all
+pnpm dev:web          # Web only
+pnpm dev:mobile       # Mobile only
+pnpm storybook        # Start Storybook
 
-# 验证
+# Validation
 pnpm lint             # ESLint
-pnpm test             # 测试
-pnpm build            # 构建
+pnpm test             # Tests
+pnpm build            # Build
 
 # Docker
-pnpm docker:build     # 构建Docker镜像
-pnpm docker:up        # 启动容器
-pnpm docker:down      # 停止容器
-pnpm docker:dev       # 开发模式（热重载）
+pnpm docker:build     # Build Docker image
+pnpm docker:up        # Start container
+pnpm docker:down      # Stop container
+pnpm docker:dev       # Dev mode (hot reload)
 
-# 部署
-pnpm cdk:deploy:dev   # 部署到dev
+# Deployment
+pnpm cdk:deploy:dev   # Deploy to dev
 pnpm cdk:deploy:staging
 pnpm cdk:deploy:prod
 ```
 
 ---
 
-## 🔗 外部资源
+## 🔗 External Resources
 
-### 设计工具
-- [v0.dev](https://v0.dev) - AI生成React UI
-- [shadcn/ui](https://ui.shadcn.com) - 组件库
-- [Tailwind CSS](https://tailwindcss.com) - 样式
+### Design Tools
+- [v0.dev](https://v0.dev) - AI-generated React UI
+- [shadcn/ui](https://ui.shadcn.com) - Component library
+- [Tailwind CSS](https://tailwindcss.com) - Styling
 
 ### Agent Skills
-- [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) - React最佳实践
-- [MCP Servers](https://github.com/modelcontextprotocol/servers) - MCP集成
+- [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) - React best practices
+- [MCP Servers](https://github.com/modelcontextprotocol/servers) - MCP integration
 
-### 文档
+### Documentation
 - [Next.js Docs](https://nextjs.org/docs)
 - [Expo Docs](https://docs.expo.dev)
 - [AWS CDK Docs](https://docs.aws.amazon.com/cdk)
 
 ---
 
-## 📋 Checklist：新项目启动
+## 📋 Checklist: New Project Setup
 
-- [ ] 阅读 [RUNBOOK.md](docs/runbook/RUNBOOK.md)
-- [ ] 按 [QUICK_START.md](docs/runbook/QUICK_START.md) 初始化项目
-- [ ] 安装 Vercel Agent Skills: `npx add-skill vercel-labs/agent-skills`
-- [ ] 配置 Storybook
-- [ ] 创建第一个Feature Spec
-- [ ] 设置CI/CD
+- [ ] Read [RUNBOOK.md](docs/runbook/RUNBOOK.md)
+- [ ] Follow [QUICK_START.md](docs/runbook/QUICK_START.md) to initialize
+- [ ] Install Vercel Agent Skills: `npx add-skill vercel-labs/agent-skills`
+- [ ] Configure Storybook
+- [ ] Create first Feature Spec
+- [ ] Set up CI/CD
 
 ---
 
-## 📋 Checklist：开发新功能
+## 📋 Checklist: Develop New Feature
 
-- [ ] 创建 `spec.md` (参考模板)
-- [ ] 定义 Schema (`packages/schemas`)
-- [ ] 实现 Domain逻辑 (`services/backend/src/domain`)
-- [ ] 创建 API Handler (`services/backend/src/handlers`)
-- [ ] 实现前端 (`apps/web/src/features`)
-- [ ] 添加测试
-- [ ] 验证: `pnpm lint && pnpm test && pnpm build`
+- [ ] Create `spec.md` (use template)
+- [ ] Define Schema (`packages/schemas`)
+- [ ] Implement Domain logic (`services/backend/src/domain`)
+- [ ] Create API Handler (`services/backend/src/handlers`)
+- [ ] Build frontend (`apps/web/src/features`)
+- [ ] Add tests
+- [ ] Verify: `pnpm lint && pnpm test && pnpm build`
+
+---
+
+[中文版](INDEX.zh.md)

@@ -1,172 +1,181 @@
-# Fawkes
+# 🔥 Fawkes
 
-> 一套 Agent 友好的全栈产品开发框架
+> Agent-friendly full-stack web app generator
 
-🚀 **快速迭代** · 🤖 **Agent友好** · 📱 **跨平台** · ☁️ **AWS原生** · 🏭 **生产级**
-
----
-
-## 📖 文档导航
-
-| 文档 | 说明 | 适合谁 |
-|------|------|--------|
-| **[RUNBOOK.md](docs/runbook/RUNBOOK.md)** | 完整技术栈规范 | 所有人必读 |
-| **[QUICK_START.md](docs/runbook/QUICK_START.md)** | 30分钟快速搭建 | 新项目起步 |
-| **[AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md)** | Agent协作最佳实践 | 使用AI开发 |
-| **[DOCKER.md](docs/runbook/DOCKER.md)** | Docker容器化开发 | 本地测试/部署 |
-| **[UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md)** | UI开发工作流 | 前端开发 |
-| **[SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md)** | Claude Code Skills推荐 | 扩展能力 |
+🚀 **Fast Iteration** · 🤖 **Agent-Friendly** · 📱 **Cross-Platform** · ☁️ **AWS Native** · 🏭 **Production-Ready**
 
 ---
 
-## 这是什么？
+## 📖 Documentation
 
-Fawkes 是一套完整的技术栈规范和工具集，让你可以：
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| **[RUNBOOK.md](docs/runbook/RUNBOOK.md)** | Complete tech stack spec | Everyone |
+| **[QUICK_START.md](docs/runbook/QUICK_START.md)** | 30-minute setup guide | New projects |
+| **[AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md)** | AI agent best practices | AI-assisted dev |
+| **[DOCKER.md](docs/runbook/DOCKER.md)** | Docker containerization | Local testing/deploy |
+| **[UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md)** | UI development workflow | Frontend |
+| **[SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md)** | Claude Code Skills | Extended capabilities |
 
-- 用 **Claude Code** 或其他 AI Agent 快速开发产品
-- 一套代码同时运行在 **Web、iOS、Android**
-- 部署到 **AWS** 的 Serverless 架构
-- **本地开发** 和 **生产环境** 体验一致
+---
 
-## 技术栈
+## What is Fawkes?
 
-| 层级 | 技术 |
-|------|------|
+Fawkes is a complete tech stack and toolset that enables you to:
+
+- Build products rapidly with **Claude Code** or other AI agents
+- Run one codebase on **Web, iOS, and Android**
+- Deploy to **AWS** serverless architecture
+- Have consistent **local development** and **production** experiences
+
+Named after Dumbledore's phoenix — reborn from ashes, creates new apps from nothing.
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
 | Web | Next.js 14 + TypeScript |
 | Mobile | Expo (React Native) |
-| 共享UI | NativeWind + shadcn/ui |
-| 后端 | AWS Lambda + API Gateway |
-| 数据库 | DynamoDB / Aurora Serverless |
-| 基础设施 | AWS CDK |
+| Shared UI | NativeWind + shadcn/ui |
+| Backend | AWS Lambda + API Gateway |
+| Database | DynamoDB / Aurora Serverless |
+| Infrastructure | AWS CDK |
 | Monorepo | pnpm + Turborepo |
 
-## 快速开始
+## Quick Start
 
-### 1. 克隆并安装
+### 1. Clone and Install
 
 ```bash
-git clone <repo>
+git clone https://github.com/thugasin5214/fawkes.git
 cd fawkes
 pnpm install
 ```
 
-### 2. 启动开发
+### 2. Start Development
 
 ```bash
-# 启动所有服务
+# Start all services
 pnpm dev
 
-# 或分别启动
-pnpm dev:web      # Web应用
-pnpm dev:mobile   # Mobile应用
-pnpm dev:backend  # 后端API
+# Or start individually
+pnpm dev:web      # Web app
+pnpm dev:mobile   # Mobile app
+pnpm dev:backend  # Backend API
 ```
 
-### 3. 验证
+### 3. Verify
 
 ```bash
-pnpm lint         # 代码检查
-pnpm test         # 运行测试
-pnpm build        # 构建
+pnpm lint         # Code linting
+pnpm test         # Run tests
+pnpm build        # Build
 ```
 
-## 目录结构
+## Project Structure
 
 ```
 fawkes/
 ├── apps/
-│   ├── web/          # Next.js Web应用
-│   └── mobile/       # Expo Mobile应用
+│   ├── web/          # Next.js web app
+│   └── mobile/       # Expo mobile app
 ├── packages/
-│   ├── ui/           # 跨平台共享UI组件
-│   ├── schemas/      # Zod Schema (API契约)
-│   ├── api-client/   # 类型安全的API客户端
-│   └── config/       # 共享配置
+│   ├── ui/           # Cross-platform shared UI
+│   ├── schemas/      # Zod schemas (API contracts)
+│   ├── api-client/   # Type-safe API client
+│   └── config/       # Shared configuration
 ├── services/
-│   └── backend/      # AWS Lambda业务逻辑
+│   └── backend/      # AWS Lambda business logic
 ├── infra/
-│   └── cdk/          # AWS CDK基础设施
+│   └── cdk/          # AWS CDK infrastructure
 ├── docs/
-│   ├── runbook/      # 操作手册
-│   └── specs/        # 功能规格
+│   ├── runbook/      # Operation guides
+│   └── specs/        # Feature specifications
 └── skills/           # Claude Code Skills
 ```
 
-## 文档
-
-| 文档 | 说明 |
-|------|------|
-| [RUNBOOK.md](docs/runbook/RUNBOOK.md) | 完整的开发规范 |
-| [QUICK_START.md](docs/runbook/QUICK_START.md) | 快速搭建指南 |
-| [AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md) | Agent交互最佳实践 |
-| [Feature Spec模板](skills/fawkes/references/feature-spec-template.md) | 功能规格模板 |
-| [UI Patterns](skills/fawkes/references/ui-patterns.md) | UI模式参考 |
-| [Testing Guide](skills/fawkes/references/testing-guide.md) | 测试指南 |
-
-## 与Agent协作
-
-### 核心原则
-
-1. **Spec First** - 先写规格文档，再让Agent实现
-2. **小步快跑** - 每次只做一件事，验证后再继续
-3. **验证驱动** - 所有修改必须通过验证命令
-
-### 示例：让Agent创建新功能
-
-```markdown
-## 任务：创建评论功能
-
-**Spec**: 请先阅读 `docs/specs/comment-spec.md`
-
-**步骤**:
-1. 在 `packages/schemas/` 创建 Schema
-2. 在 `services/backend/` 实现业务逻辑
-3. 在 `apps/web/` 实现前端
-
-**验证**: `pnpm lint && pnpm test && pnpm build`
-```
-
-详见 [Agent交互指南](docs/runbook/AGENT_INTERACTION.md)
-
-## 常用命令
+## Docker
 
 ```bash
-# 开发
-pnpm dev              # 启动所有服务
-pnpm dev:web          # 只启动Web
+# Production build
+pnpm docker:build
+pnpm docker:up
 
-# 验证
-pnpm lint             # ESLint
-pnpm test             # 测试
-pnpm build            # 构建
+# Development with hot reload
+pnpm docker:dev
 
-# Docker
-pnpm docker:build     # 构建Docker镜像
-pnpm docker:up        # 启动容器
-pnpm docker:dev       # 开发模式（热重载）
-
-# 部署
-pnpm cdk:deploy:dev   # 部署到dev环境
-pnpm release:staging  # 发布到staging
+# With LocalStack (AWS emulation)
+pnpm docker:local-aws
 ```
 
-完整命令列表见 [package.json](package.json)
+## Working with AI Agents
 
-## 自定义Skill
+### Core Principles
 
-项目包含一个 Claude Code Skill，位于 `skills/fawkes/`：
+1. **Spec First** — Write specifications before implementation
+2. **Small Steps** — Do one thing at a time, verify, then continue
+3. **Validation Driven** — All changes must pass validation commands
+
+### Example: Create a New Feature
+
+```markdown
+## Task: Create comments feature
+
+**Spec**: Read `docs/specs/comment-spec.md` first
+
+**Steps**:
+1. Create Schema in `packages/schemas/`
+2. Implement logic in `services/backend/`
+3. Build frontend in `apps/web/`
+
+**Verify**: `pnpm lint && pnpm test && pnpm build`
+```
+
+See [Agent Interaction Guide](docs/runbook/AGENT_INTERACTION.md) for details.
+
+## Common Commands
+
+```bash
+# Development
+pnpm dev              # Start all services
+pnpm dev:web          # Web only
+
+# Validation
+pnpm lint             # ESLint
+pnpm test             # Tests
+pnpm build            # Build
+
+# Docker
+pnpm docker:build     # Build Docker image
+pnpm docker:up        # Start container
+pnpm docker:dev       # Dev mode (hot reload)
+
+# Deployment
+pnpm cdk:deploy:dev   # Deploy to dev
+pnpm release:staging  # Release to staging
+```
+
+See [package.json](package.json) for full command list.
+
+## Custom Skill
+
+This project includes a Claude Code Skill at `skills/fawkes/`:
 
 ```
 skills/fawkes/
-├── SKILL.md                    # Skill主文件
+├── SKILL.md                      # Main skill file
 └── references/
-    ├── feature-spec-template.md  # 功能规格模板
-    ├── ui-patterns.md           # UI模式参考
-    └── testing-guide.md         # 测试指南
+    ├── feature-spec-template.md  # Feature spec template
+    ├── ui-patterns.md            # UI pattern reference
+    └── testing-guide.md          # Testing guide
 ```
 
-你可以将此Skill导入到Claude Code中使用。
+Import this skill into Claude Code to use it.
 
 ## License
 
 MIT
+
+---
+
+[中文文档](README.zh.md)
