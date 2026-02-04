@@ -1,0 +1,54 @@
+# =============================================================================
+# Root .dockerignore - for building from repo root
+# =============================================================================
+
+# Dependencies (will be installed fresh in container)
+**/node_modules
+.pnpm-store
+
+# Build outputs
+**/.next
+**/out
+**/dist
+**/build
+**/.turbo
+
+# Development files
+.env*.local
+**/*.log
+**/npm-debug.log*
+
+# IDE
+.idea
+.vscode
+**/*.swp
+**/*.swo
+
+# OS
+.DS_Store
+**/Thumbs.db
+
+# Testing
+**/coverage
+**/.nyc_output
+
+# Git
+.git
+.gitignore
+
+# Documentation (reduce image size)
+**/*.md
+!README.md
+
+# CDK outputs
+**/cdk.out
+
+# Mobile app (not needed for web Docker build)
+apps/mobile
+
+# E2E tests
+e2e
+
+# Skills and tools (not needed in runtime)
+skills
+tools

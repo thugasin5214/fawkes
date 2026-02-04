@@ -1,0 +1,96 @@
+{
+  "name": "fawkes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fawkes - Agent-friendly full-stack web app generator",
+  "scripts": {
+    "========== Development ==========": "",
+    "dev": "turbo run dev",
+    "dev:web": "turbo run dev --filter=web",
+    "dev:mobile": "turbo run dev --filter=mobile",
+    "dev:backend": "turbo run dev --filter=backend",
+    
+    "========== Build ==========": "",
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=web",
+    "build:mobile": "turbo run build --filter=mobile",
+    "build:backend": "turbo run build --filter=backend",
+    
+    "========== Testing ==========": "",
+    "test": "turbo run test",
+    "test:unit": "turbo run test:unit",
+    "test:integration": "turbo run test:integration",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:coverage": "turbo run test -- --coverage",
+    "test:watch": "turbo run test -- --watch",
+    
+    "========== Code Quality ==========": "",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint -- --fix",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
+    
+    "========== Docker ==========": "",
+    "docker:build": "docker compose build web",
+    "docker:up": "docker compose up web",
+    "docker:up:d": "docker compose up web -d",
+    "docker:down": "docker compose down",
+    "docker:dev": "docker compose --profile dev up web-dev",
+    "docker:local-aws": "docker compose --profile local-aws up",
+    "docker:logs": "docker compose logs -f",
+    "docker:clean": "docker compose down -v && docker system prune -f",
+    
+    "========== Infrastructure ==========": "",
+    "cdk:synth": "cd infra/cdk && cdk synth",
+    "cdk:diff": "cd infra/cdk && cdk diff",
+    "cdk:deploy:dev": "cd infra/cdk && cdk deploy --context env=dev --require-approval never",
+    "cdk:deploy:staging": "cd infra/cdk && cdk deploy --context env=staging --require-approval never",
+    "cdk:deploy:prod": "cd infra/cdk && cdk deploy --context env=prod",
+    "cdk:destroy:dev": "cd infra/cdk && cdk destroy --context env=dev",
+    
+    "========== Mobile ==========": "",
+    "mobile:start": "cd apps/mobile && expo start",
+    "mobile:ios": "cd apps/mobile && expo run:ios",
+    "mobile:android": "cd apps/mobile && expo run:android",
+    "mobile:build:ios": "cd apps/mobile && eas build --platform ios",
+    "mobile:build:android": "cd apps/mobile && eas build --platform android",
+    "mobile:submit:ios": "cd apps/mobile && eas submit --platform ios",
+    "mobile:submit:android": "cd apps/mobile && eas submit --platform android",
+    
+    "========== Release ==========": "",
+    "release:staging": "pnpm cdk:deploy:staging && pnpm release:web:staging",
+    "release:prod": "pnpm cdk:deploy:prod && pnpm release:web:prod",
+    "release:web:staging": "cd apps/web && vercel --prod --env staging",
+    "release:web:prod": "cd apps/web && vercel --prod",
+    
+    "========== Utilities ==========": "",
+    "codegen": "turbo run codegen",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0",
+    "prettier": "^3.1.0",
+    "turbo": "^2.0.0",
+    "typescript": "^5.3.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  }
+}

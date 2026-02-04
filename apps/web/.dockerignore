@@ -1,0 +1,6 @@
+# Web app specific ignores (when building from apps/web context)
+node_modules
+.next
+out
+.env*.local
+*.log

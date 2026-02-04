@@ -1,0 +1,131 @@
+# =============================================================================
+# Product Factory - Docker Compose
+# =============================================================================
+# Local development and testing with Docker
+#
+# Usage:
+#   docker compose up web              # Start web only (production build)
+#   docker compose --profile dev up    # Start web-dev with hot reload
+#   docker compose --profile local-aws up  # Start with LocalStack
+#   docker compose up --build          # Rebuild and start
+#   docker compose down                # Stop all services
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Web Frontend (Next.js) - Production Build
+  # ---------------------------------------------------------------------------
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:4000}
+        - NEXT_PUBLIC_APP_ENV=${NEXT_PUBLIC_APP_ENV:-development}
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:4000}
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ---------------------------------------------------------------------------
+  # Web Development Mode (hot reload)
+  # ---------------------------------------------------------------------------
+  web-dev:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/web/node_modules
+      - /app/apps/web/.next
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:4000}
+    command: sh -c "corepack enable && pnpm install && pnpm dev:web"
+    profiles:
+      - dev
+
+  # ---------------------------------------------------------------------------
+  # LocalStack (AWS services emulation)
+  # ---------------------------------------------------------------------------
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"           # LocalStack Gateway
+      - "4510-4559:4510-4559" # External service ports
+    environment:
+      - SERVICES=dynamodb,s3,cognito,lambda,apigateway
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - PERSISTENCE=1
+    volumes:
+      - localstack-data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - local-aws
+
+  # ---------------------------------------------------------------------------
+  # Backend (Lambda functions via SAM Local) - Optional
+  # ---------------------------------------------------------------------------
+  # Uncomment when you have SAM templates set up
+  # backend:
+  #   image: amazon/aws-sam-cli-build-image-nodejs20.x
+  #   working_dir: /app
+  #   volumes:
+  #     - .:/app
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   ports:
+  #     - "4000:4000"
+  #   environment:
+  #     - AWS_SAM_LOCAL=true
+  #     - AWS_ENDPOINT_URL=http://localstack:4566
+  #   command: sam local start-api --host 0.0.0.0 --port 4000
+  #   depends_on:
+  #     localstack:
+  #       condition: service_healthy
+  #   profiles:
+  #     - local-aws
+
+volumes:
+  localstack-data:
+
+# =============================================================================
+# Quick Reference
+# =============================================================================
+# 
+# PROFILES:
+#   (none)    - Just the production web build
+#   dev       - Web with hot reload (development)
+#   local-aws - LocalStack for AWS emulation
+#
+# EXAMPLES:
+#   # Production-like web build
+#   docker compose up web
+#
+#   # Development with hot reload
+#   docker compose --profile dev up web-dev
+#
+#   # Full local stack with AWS emulation
+#   docker compose --profile local-aws up
+#
+#   # Build fresh
+#   docker compose build --no-cache web
+#
+# ENV VARS (optional, see .env.example):
+#   NEXT_PUBLIC_API_URL  - Backend API URL
+#   NEXT_PUBLIC_APP_ENV  - Environment name
+# =============================================================================
