@@ -134,6 +134,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build backend
+        run: pnpm build:backend
+
       - name: CDK Synth
         run: pnpm cdk:synth
 
