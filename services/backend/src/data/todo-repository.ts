@@ -4,7 +4,6 @@ import {
   PutCommand,
   GetCommand,
   QueryCommand,
-  UpdateCommand,
   DeleteCommand,
 } from "@aws-sdk/lib-dynamodb";
 import type { Todo } from "@repo/schemas";
@@ -65,7 +64,7 @@ export const TodoRepository = {
     }
 
     // 移除DynamoDB的PK/SK，返回干净的Todo对象
-    const { PK, SK, ...todo } = result.Item;
+    const { PK: _pk, SK: _sk, ...todo } = result.Item;
     return todo as Todo;
   },
 
@@ -85,7 +84,7 @@ export const TodoRepository = {
     );
 
     return (result.Items || []).map((item) => {
-      const { PK, SK, ...todo } = item;
+      const { PK: _pk, SK: _sk, ...todo } = item;
       return todo as Todo;
     });
   },

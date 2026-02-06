@@ -22,7 +22,9 @@ const response = (
 });
 
 // 辅助函数：从event获取用户ID（实际项目中从JWT解析）
-const getUserId = (event: any): string => {
+const getUserId = (event: {
+  requestContext?: { authorizer?: { claims?: { sub?: string } } };
+}): string => {
   // TODO: 实际项目中从Authorization header解析JWT
   return event.requestContext?.authorizer?.claims?.sub || "anonymous";
 };
