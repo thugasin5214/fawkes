@@ -1,4 +1,4 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   DynamoDBDocumentClient,
   PutCommand,
@@ -6,25 +6,25 @@ import {
   QueryCommand,
   UpdateCommand,
   DeleteCommand,
-} from '@aws-sdk/lib-dynamodb'
-import type { Todo } from '@repo/schemas'
+} from "@aws-sdk/lib-dynamodb";
+import type { Todo } from "@repo/schemas";
 
 // 初始化DynamoDB客户端
 const client = new DynamoDBClient({
-  region: process.env.AWS_REGION || 'us-east-1',
+  region: process.env.AWS_REGION || "us-east-1",
   ...(process.env.DYNAMODB_ENDPOINT && {
     endpoint: process.env.DYNAMODB_ENDPOINT,
   }),
-})
+});
 
-const docClient = DynamoDBDocumentClient.from(client)
+const docClient = DynamoDBDocumentClient.from(client);
 
-const TABLE_NAME = process.env.TODOS_TABLE_NAME || 'todos'
+const TABLE_NAME = process.env.TODOS_TABLE_NAME || "todos";
 
 /**
  * Todo Repository
  * 处理DynamoDB数据访问
- * 
+ *
  * Table Schema:
  * - PK: USER#<userId>
  * - SK: TODO#<todoId>
@@ -42,8 +42,8 @@ export const TodoRepository = {
           SK: `TODO#${todo.id}`,
           ...todo,
         },
-      })
-    )
+      }),
+    );
   },
 
   /**
@@ -57,16 +57,16 @@ export const TodoRepository = {
           PK: `USER#${userId}`,
           SK: `TODO#${todoId}`,
         },
-      })
-    )
+      }),
+    );
 
     if (!result.Item) {
-      return null
+      return null;
     }
 
     // 移除DynamoDB的PK/SK，返回干净的Todo对象
-    const { PK, SK, ...todo } = result.Item
-    return todo as Todo
+    const { PK, SK, ...todo } = result.Item;
+    return todo as Todo;
   },
 
   /**
@@ -76,18 +76,18 @@ export const TodoRepository = {
     const result = await docClient.send(
       new QueryCommand({
         TableName: TABLE_NAME,
-        KeyConditionExpression: 'PK = :pk AND begins_with(SK, :sk)',
+        KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
         ExpressionAttributeValues: {
-          ':pk': `USER#${userId}`,
-          ':sk': 'TODO#',
+          ":pk": `USER#${userId}`,
+          ":sk": "TODO#",
         },
-      })
-    )
+      }),
+    );
 
     return (result.Items || []).map((item) => {
-      const { PK, SK, ...todo } = item
-      return todo as Todo
-    })
+      const { PK, SK, ...todo } = item;
+      return todo as Todo;
+    });
   },
 
   /**
@@ -102,8 +102,8 @@ export const TodoRepository = {
           SK: `TODO#${todo.id}`,
           ...todo,
         },
-      })
-    )
+      }),
+    );
   },
 
   /**
@@ -117,7 +117,7 @@ export const TodoRepository = {
           PK: `USER#${userId}`,
           SK: `TODO#${todoId}`,
         },
-      })
-    )
+      }),
+    );
   },
-}
+};

@@ -5,6 +5,7 @@
 ## 1. 列表模式 (List Pattern)
 
 ### 何时使用
+
 - 展示多条数据
 - 需要筛选/搜索/分页
 
@@ -29,8 +30,8 @@ export function FeatureList() {
   // Error State
   if (error) {
     return (
-      <ErrorState 
-        message={error.message} 
+      <ErrorState
+        message={error.message}
         onRetry={refetch}
       />
     )
@@ -87,6 +88,7 @@ export function FeatureList() {
 ## 2. 表单模式 (Form Pattern)
 
 ### 何时使用
+
 - 创建/编辑数据
 - 用户输入
 
@@ -162,18 +164,17 @@ export function FeatureForm({ defaultValues, onSubmit }: Props) {
 ```typescript
 // packages/schemas/src/[feature].ts
 export const FeatureFormSchema = z.object({
-  title: z.string()
-    .min(1, 'Title is required')
-    .max(100, 'Title must be less than 100 characters'),
-  description: z.string()
-    .max(500, 'Description must be less than 500 characters')
+  title: z
+    .string()
+    .min(1, "Title is required")
+    .max(100, "Title must be less than 100 characters"),
+  description: z
+    .string()
+    .max(500, "Description must be less than 500 characters")
     .optional(),
-  email: z.string()
-    .email('Invalid email address'),
-  url: z.string()
-    .url('Invalid URL')
-    .optional()
-})
+  email: z.string().email("Invalid email address"),
+  url: z.string().url("Invalid URL").optional(),
+});
 ```
 
 ---
@@ -181,6 +182,7 @@ export const FeatureFormSchema = z.object({
 ## 3. 向导模式 (Wizard Pattern)
 
 ### 何时使用
+
 - 多步骤流程
 - 复杂表单
 - 引导式体验
@@ -220,7 +222,7 @@ export function FeatureWizard() {
     <div>
       {/* Progress Bar */}
       <div className="h-2 bg-gray-200 rounded">
-        <div 
+        <div
           className="h-full bg-blue-500 rounded transition-all"
           style={{ width: `${progress}%` }}
         />
@@ -229,7 +231,7 @@ export function FeatureWizard() {
       {/* Step Indicator */}
       <div className="flex justify-between py-4">
         {STEPS.map((s, i) => (
-          <div 
+          <div
             key={s}
             className={cn(
               'flex items-center',
@@ -246,14 +248,14 @@ export function FeatureWizard() {
 
       {/* Step Content */}
       {step === 'info' && (
-        <InfoStep 
-          data={data} 
+        <InfoStep
+          data={data}
           onUpdate={(d) => setData({ ...data, ...d })}
           onNext={goNext}
         />
       )}
       {step === 'details' && (
-        <DetailsStep 
+        <DetailsStep
           data={data}
           onUpdate={(d) => setData({ ...data, ...d })}
           onNext={goNext}
@@ -261,7 +263,7 @@ export function FeatureWizard() {
         />
       )}
       {step === 'review' && (
-        <ReviewStep 
+        <ReviewStep
           data={data}
           onSubmit={handleSubmit}
           onBack={goBack}
@@ -280,6 +282,7 @@ export function FeatureWizard() {
 ## 4. 详情页模式 (Detail Pattern)
 
 ### 何时使用
+
 - 展示单条数据详情
 - 需要操作按钮（编辑/删除）
 
@@ -292,7 +295,7 @@ import { useParams, useRouter } from 'next/navigation'
 export function FeatureDetail() {
   const { id } = useParams()
   const router = useRouter()
-  
+
   const { data, isLoading, error } = useQuery({
     queryKey: ['feature', id],
     queryFn: () => apiClient.features.get(id)
@@ -378,7 +381,7 @@ export function FeatureSearch() {
         className="w-full pl-10 pr-4 py-2 border rounded-lg"
       />
       <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-      
+
       {/* Results Dropdown */}
       {query && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg">
@@ -403,6 +406,7 @@ export function FeatureSearch() {
 ## 6. Modal/Dialog模式
 
 ### 何时使用
+
 - 需要用户确认
 - 简单表单
 - 不想离开当前页面
@@ -463,28 +467,28 @@ export function ConfirmDeleteDialog({ onConfirm }: { onConfirm: () => void }) {
 
 ```typescript
 // 使用react-hot-toast或sonner
-import { toast } from 'sonner'
+import { toast } from "sonner";
 
 // Success
-toast.success('Item created successfully')
+toast.success("Item created successfully");
 
 // Error
-toast.error('Failed to save')
+toast.error("Failed to save");
 
 // With action
-toast('Item deleted', {
+toast("Item deleted", {
   action: {
-    label: 'Undo',
-    onClick: () => handleUndo()
-  }
-})
+    label: "Undo",
+    onClick: () => handleUndo(),
+  },
+});
 
 // Promise (自动处理loading/success/error)
 toast.promise(saveData(), {
-  loading: 'Saving...',
-  success: 'Saved!',
-  error: 'Failed to save'
-})
+  loading: "Saving...",
+  success: "Saved!",
+  error: "Failed to save",
+});
 ```
 
 ---
@@ -559,12 +563,12 @@ export function ErrorState({ message, onRetry }: ErrorStateProps) {
 
 ## 选择指南
 
-| 场景 | 推荐模式 |
-|------|---------|
-| 展示多条数据 | List Pattern |
-| 创建/编辑单条数据 | Form Pattern |
-| 多步骤流程 | Wizard Pattern |
-| 展示单条数据 | Detail Pattern |
-| 快速查找 | Search Pattern |
-| 简单确认/输入 | Modal Pattern |
-| 操作反馈 | Toast Pattern |
+| 场景              | 推荐模式       |
+| ----------------- | -------------- |
+| 展示多条数据      | List Pattern   |
+| 创建/编辑单条数据 | Form Pattern   |
+| 多步骤流程        | Wizard Pattern |
+| 展示单条数据      | Detail Pattern |
+| 快速查找          | Search Pattern |
+| 简单确认/输入     | Modal Pattern  |
+| 操作反馈          | Toast Pattern  |

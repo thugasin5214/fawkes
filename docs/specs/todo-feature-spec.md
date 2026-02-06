@@ -5,9 +5,11 @@
 ## 1. 概述
 
 ### 目的
+
 让用户可以创建、管理和追踪待办事项，提高日常任务管理效率。
 
 ### 用户故事
+
 ```
 作为 普通用户
 我想要 创建和管理待办事项
@@ -15,6 +17,7 @@
 ```
 
 ### 范围
+
 - ✅ 包含：CRUD操作、完成状态、列表视图
 - ❌ 不包含：标签、优先级、提醒、共享协作
 
@@ -26,7 +29,7 @@
 
 ```typescript
 // packages/schemas/src/todo.ts
-import { z } from 'zod'
+import { z } from "zod";
 
 export const TodoSchema = z.object({
   id: z.string().uuid(),
@@ -36,24 +39,25 @@ export const TodoSchema = z.object({
   userId: z.string(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
-  completedAt: z.string().datetime().optional()
-})
+  completedAt: z.string().datetime().optional(),
+});
 
-export type Todo = z.infer<typeof TodoSchema>
+export type Todo = z.infer<typeof TodoSchema>;
 
 export const CreateTodoSchema = z.object({
-  title: z.string().min(1, 'Title is required').max(200),
-  description: z.string().max(1000).optional()
-})
+  title: z.string().min(1, "Title is required").max(200),
+  description: z.string().max(1000).optional(),
+});
 
-export type CreateTodoInput = z.infer<typeof CreateTodoSchema>
+export type CreateTodoInput = z.infer<typeof CreateTodoSchema>;
 
-export const UpdateTodoSchema = CreateTodoSchema.partial()
+export const UpdateTodoSchema = CreateTodoSchema.partial();
 
-export type UpdateTodoInput = z.infer<typeof UpdateTodoSchema>
+export type UpdateTodoInput = z.infer<typeof UpdateTodoSchema>;
 ```
 
 ### 关联关系
+
 - Todo belongs to User (userId)
 
 ---
@@ -62,21 +66,22 @@ export type UpdateTodoInput = z.infer<typeof UpdateTodoSchema>
 
 ### Endpoints
 
-| Method | Path | Description | Auth |
-|--------|------|-------------|------|
-| GET | `/api/todos` | 获取当前用户的todo列表 | Required |
-| GET | `/api/todos/:id` | 获取单个todo | Required |
-| POST | `/api/todos` | 创建新todo | Required |
-| PUT | `/api/todos/:id` | 更新todo | Required |
-| DELETE | `/api/todos/:id` | 删除todo | Required |
-| POST | `/api/todos/:id/complete` | 标记完成 | Required |
-| POST | `/api/todos/:id/uncomplete` | 取消完成 | Required |
+| Method | Path                        | Description            | Auth     |
+| ------ | --------------------------- | ---------------------- | -------- |
+| GET    | `/api/todos`                | 获取当前用户的todo列表 | Required |
+| GET    | `/api/todos/:id`            | 获取单个todo           | Required |
+| POST   | `/api/todos`                | 创建新todo             | Required |
+| PUT    | `/api/todos/:id`            | 更新todo               | Required |
+| DELETE | `/api/todos/:id`            | 删除todo               | Required |
+| POST   | `/api/todos/:id/complete`   | 标记完成               | Required |
+| POST   | `/api/todos/:id/uncomplete` | 取消完成               | Required |
 
 ### Request/Response Examples
 
 #### GET /api/todos
 
 Response:
+
 ```json
 {
   "data": [
@@ -101,6 +106,7 @@ Response:
 #### POST /api/todos
 
 Request:
+
 ```json
 {
   "title": "Buy groceries",
@@ -109,6 +115,7 @@ Request:
 ```
 
 Response:
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -133,12 +140,12 @@ Response:
 
 ### 状态定义
 
-| 状态 | 触发条件 | UI表现 |
-|------|---------|--------|
-| Loading | 初始加载或刷新 | 3个骨架卡片 |
-| Empty | data.length === 0 | 空状态插图 + "Add your first todo" 按钮 |
-| Error | API返回错误 | 错误提示 + 重试按钮 |
-| Success | 数据正常返回 | Todo列表 |
+| 状态    | 触发条件          | UI表现                                  |
+| ------- | ----------------- | --------------------------------------- |
+| Loading | 初始加载或刷新    | 3个骨架卡片                             |
+| Empty   | data.length === 0 | 空状态插图 + "Add your first todo" 按钮 |
+| Error   | API返回错误       | 错误提示 + 重试按钮                     |
+| Success | 数据正常返回      | Todo列表                                |
 
 ### 组件树
 
@@ -191,13 +198,16 @@ TodoPage
 ## 5. 业务规则
 
 ### 验证规则
+
 - title：必填，1-200字符
 - description：可选，最多1000字符
 
 ### 权限规则
+
 - 用户只能操作自己的todos
 
 ### 业务逻辑
+
 1. 创建todo时，completed默认为false
 2. 完成todo时，自动设置completedAt时间戳
 3. 取消完成时，清空completedAt
@@ -207,6 +217,7 @@ TodoPage
 ## 6. 验收标准
 
 ### 功能验收
+
 - [ ] 用户可以查看自己的todo列表
 - [ ] 用户可以创建新的todo
 - [ ] 用户可以编辑现有todo的title和description
@@ -217,6 +228,7 @@ TodoPage
 - [ ] Error状态显示错误信息和重试按钮
 
 ### 技术验收
+
 - [ ] Schema定义在 `packages/schemas/src/todo.ts`
 - [ ] API Handler在 `services/backend/src/handlers/todo.ts`
 - [ ] Domain逻辑在 `services/backend/src/domain/todo.ts`
@@ -228,6 +240,7 @@ TodoPage
 - [ ] `pnpm build` 通过
 
 ### E2E验收
+
 - [ ] 冒烟测试：创建→查看→完成→编辑→删除 完整流程
 
 ---
@@ -235,14 +248,17 @@ TodoPage
 ## 7. 技术Notes
 
 ### 依赖
+
 - 无需额外npm包，使用现有stack
 
 ### 数据库
+
 - Table: `todos`
 - Primary Key: `PK=USER#userId`, `SK=TODO#todoId`
 - GSI: none
 
 ### 注意事项
+
 - 乐观更新toggle操作以提升体验
 - Modal使用shadcn/ui Dialog组件
 
@@ -250,19 +266,19 @@ TodoPage
 
 ## 8. 时间线
 
-| 阶段 | 任务 | 预估 |
-|------|------|------|
-| 1 | Schema定义 | 30min |
-| 2 | Backend API | 2h |
-| 3 | Data层 | 1h |
-| 4 | Web UI | 3h |
-| 5 | 测试 | 1h |
-| **总计** | | **7.5h** |
+| 阶段     | 任务        | 预估     |
+| -------- | ----------- | -------- |
+| 1        | Schema定义  | 30min    |
+| 2        | Backend API | 2h       |
+| 3        | Data层      | 1h       |
+| 4        | Web UI      | 3h       |
+| 5        | 测试        | 1h       |
+| **总计** |             | **7.5h** |
 
 ---
 
 ## Changelog
 
-| 日期 | 变更 | 作者 |
-|------|------|------|
+| 日期       | 变更     | 作者   |
+| ---------- | -------- | ------ |
 | 2024-01-01 | 初始版本 | Claude |

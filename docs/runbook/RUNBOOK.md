@@ -6,14 +6,17 @@
 ## 0. 核心原则
 
 ### R0: Repo是唯一真相
+
 - 所有决策必须落到代码/文档
 - Agent不允许"口头记忆"，只能从repo读规范再改代码
 
 ### R1: 强约定目录 + 强命令
+
 - 所有验证动作都是CLI（人/agent同样跑）
 - `pnpm lint/test/build`、`cdk synth/diff`必须一键跑通
 
 ### R2: 三环境
+
 - `dev` - 本地/个人AWS
 - `staging` - 团队共享
 - `prod` - 线上
@@ -22,18 +25,18 @@
 
 ## 1. 技术栈总览
 
-| 层级 | 技术选择 | 理由 |
-|------|---------|------|
-| **Web** | Next.js 14 (App Router) + TypeScript | Agent训练数据多，SSR/SSG灵活 |
-| **Mobile** | Expo (React Native) + TypeScript | 一套代码iOS/Android |
-| **共享UI** | NativeWind + react-native-web | Tailwind跨平台，轻量 |
-| **组件库** | shadcn/ui (Web) + 自定义primitives (Mobile) | 可复制，非黑盒依赖 |
-| **后端** | AWS Lambda + API Gateway | Serverless，无运维 |
-| **数据库** | DynamoDB (轻应用) / Aurora Serverless (复杂) | 按需选择 |
-| **存储** | S3 | 标准方案 |
-| **认证** | Cognito / 自建JWT | 生产级 |
-| **IaC** | AWS CDK (TypeScript) | Infra也是代码，agent友好 |
-| **Monorepo** | pnpm + turborepo | 统一依赖，增量构建 |
+| 层级         | 技术选择                                     | 理由                         |
+| ------------ | -------------------------------------------- | ---------------------------- |
+| **Web**      | Next.js 14 (App Router) + TypeScript         | Agent训练数据多，SSR/SSG灵活 |
+| **Mobile**   | Expo (React Native) + TypeScript             | 一套代码iOS/Android          |
+| **共享UI**   | NativeWind + react-native-web                | Tailwind跨平台，轻量         |
+| **组件库**   | shadcn/ui (Web) + 自定义primitives (Mobile)  | 可复制，非黑盒依赖           |
+| **后端**     | AWS Lambda + API Gateway                     | Serverless，无运维           |
+| **数据库**   | DynamoDB (轻应用) / Aurora Serverless (复杂) | 按需选择                     |
+| **存储**     | S3                                           | 标准方案                     |
+| **认证**     | Cognito / 自建JWT                            | 生产级                       |
+| **IaC**      | AWS CDK (TypeScript)                         | Infra也是代码，agent友好     |
+| **Monorepo** | pnpm + turborepo                             | 统一依赖，增量构建           |
 
 ---
 
@@ -242,47 +245,56 @@ pnpm lint && pnpm test && pnpm build
 
 **这是agent最重要的输入文件！**
 
-```markdown
+````markdown
 # Feature: [Feature Name]
 
 ## 目的
+
 [这个功能解决什么问题？]
 
 ## 用户故事
+
 - 作为 [角色]，我想要 [功能]，以便 [价值]
 
 ## 数据模型
+
 ```typescript
 interface FeatureData {
-  id: string
+  id: string;
   // ...
 }
 ```
+````
 
 ## API契约
+
 - `GET /api/[feature]` - 获取列表
 - `POST /api/[feature]` - 创建
 - `PUT /api/[feature]/:id` - 更新
 - `DELETE /api/[feature]/:id` - 删除
 
 ## UI状态
+
 - [ ] Loading - 加载中
 - [ ] Empty - 空状态
 - [ ] Error - 错误状态
 - [ ] Success - 成功状态
 
 ## 交互规则
+
 1. [点击某按钮时...]
 2. [表单验证规则...]
 3. [错误处理...]
 
 ## 验收标准
+
 - [ ] 单元测试覆盖核心逻辑
 - [ ] API集成测试通过
 - [ ] Lint通过
 - [ ] Build通过
 - [ ] E2E冒烟测试通过（如适用）
-```
+
+````
 
 ---
 
@@ -315,12 +327,14 @@ pnpm lint
 pnpm test
 pnpm build:web
 pnpm test:e2e  # 如适用
-```
+````
 
 **Output**:
+
 - 代码变更
 - 填写验收checklist
-```
+
+````
 
 ### 5.3 UI组件开发规范
 
@@ -339,12 +353,12 @@ interface ButtonProps {
   children: React.ReactNode
 }
 
-export function Button({ 
-  variant = 'primary', 
-  size = 'md', 
+export function Button({
+  variant = 'primary',
+  size = 'md',
   disabled = false,
-  onPress, 
-  children 
+  onPress,
+  children
 }: ButtonProps) {
   return (
     <Pressable
@@ -375,7 +389,7 @@ export function Button({
     </Pressable>
   )
 }
-```
+````
 
 #### 交互模式（packages/ui/patterns）
 
@@ -442,9 +456,9 @@ export const AllVariants: Story = {
 ```
          /\
         /  \     E2E (Playwright) - 关键路径
-       /----\    
+       /----\
       /      \   Integration - API + DB
-     /--------\  
+     /--------\
     /          \ Unit - Domain逻辑
    --------------
 ```
@@ -453,52 +467,54 @@ export const AllVariants: Story = {
 
 ```typescript
 // services/backend/test/unit/todo.test.ts
-import { describe, it, expect } from 'vitest'
-import { createTodo, validateTodo } from '../../src/domain/todo'
+import { describe, it, expect } from "vitest";
+import { createTodo, validateTodo } from "../../src/domain/todo";
 
-describe('Todo Domain', () => {
-  describe('createTodo', () => {
-    it('should create a todo with valid input', () => {
-      const input = { title: 'Test', userId: 'user-1' }
-      const result = createTodo(input)
-      
-      expect(result.id).toBeDefined()
-      expect(result.title).toBe('Test')
-      expect(result.completed).toBe(false)
-    })
+describe("Todo Domain", () => {
+  describe("createTodo", () => {
+    it("should create a todo with valid input", () => {
+      const input = { title: "Test", userId: "user-1" };
+      const result = createTodo(input);
 
-    it('should throw on empty title', () => {
-      const input = { title: '', userId: 'user-1' }
-      expect(() => createTodo(input)).toThrow('Title is required')
-    })
-  })
-})
+      expect(result.id).toBeDefined();
+      expect(result.title).toBe("Test");
+      expect(result.completed).toBe(false);
+    });
+
+    it("should throw on empty title", () => {
+      const input = { title: "", userId: "user-1" };
+      expect(() => createTodo(input)).toThrow("Title is required");
+    });
+  });
+});
 ```
 
 ### 6.3 E2E测试（Playwright）
 
 ```typescript
 // e2e/web/todo.spec.ts
-import { test, expect } from '@playwright/test'
+import { test, expect } from "@playwright/test";
 
-test.describe('Todo Feature', () => {
-  test('should create a new todo', async ({ page }) => {
+test.describe("Todo Feature", () => {
+  test("should create a new todo", async ({ page }) => {
     // 1. 导航到页面
-    await page.goto('/todos')
-    
-    // 2. 填写表单
-    await page.fill('[data-testid="todo-input"]', 'Buy milk')
-    await page.click('[data-testid="add-button"]')
-    
-    // 3. 验证结果
-    await expect(page.locator('[data-testid="todo-item"]')).toContainText('Buy milk')
-  })
+    await page.goto("/todos");
 
-  test('should show empty state', async ({ page }) => {
-    await page.goto('/todos')
-    await expect(page.locator('[data-testid="empty-state"]')).toBeVisible()
-  })
-})
+    // 2. 填写表单
+    await page.fill('[data-testid="todo-input"]', "Buy milk");
+    await page.click('[data-testid="add-button"]');
+
+    // 3. 验证结果
+    await expect(page.locator('[data-testid="todo-item"]')).toContainText(
+      "Buy milk",
+    );
+  });
+
+  test("should show empty state", async ({ page }) => {
+    await page.goto("/todos");
+    await expect(page.locator('[data-testid="empty-state"]')).toBeVisible();
+  });
+});
 ```
 
 ---
@@ -592,12 +608,12 @@ DYNAMODB_ENDPOINT=http://localhost:8000
 
 ### 9.1 常见问题
 
-| 问题 | 解决方案 |
-|------|---------|
+| 问题                | 解决方案                                          |
+| ------------------- | ------------------------------------------------- |
 | `pnpm install` 失败 | 删除 `node_modules` 和 `pnpm-lock.yaml`，重新安装 |
-| TypeScript类型错误 | 运行 `pnpm typecheck` 查看详情 |
-| CDK部署失败 | 运行 `pnpm cdk:diff` 检查变更 |
-| Mobile构建失败 | 运行 `expo doctor` 诊断 |
+| TypeScript类型错误  | 运行 `pnpm typecheck` 查看详情                    |
+| CDK部署失败         | 运行 `pnpm cdk:diff` 检查变更                     |
+| Mobile构建失败      | 运行 `expo doctor` 诊断                           |
 
 ### 9.2 Agent调试
 
@@ -612,9 +628,9 @@ DYNAMODB_ENDPOINT=http://localhost:8000
 
 ## 10. 版本记录
 
-| 版本 | 日期 | 变更 |
-|------|------|------|
-| 1.0 | 2024-01 | 初始版本 |
+| 版本 | 日期    | 变更     |
+| ---- | ------- | -------- |
+| 1.0  | 2024-01 | 初始版本 |
 
 ---
 

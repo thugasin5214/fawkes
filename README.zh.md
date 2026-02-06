@@ -8,14 +8,14 @@
 
 ## 📖 文档导航
 
-| 文档 | 说明 | 适合谁 |
-|------|------|--------|
-| **[RUNBOOK.md](docs/runbook/RUNBOOK.md)** | 完整技术栈规范 | 所有人必读 |
-| **[QUICK_START.md](docs/runbook/QUICK_START.md)** | 30分钟快速搭建 | 新项目起步 |
-| **[AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md)** | Agent协作最佳实践 | 使用AI开发 |
-| **[DOCKER.md](docs/runbook/DOCKER.md)** | Docker容器化开发 | 本地测试/部署 |
-| **[UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md)** | UI开发工作流 | 前端开发 |
-| **[SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md)** | Claude Code Skills推荐 | 扩展能力 |
+| 文档                                                          | 说明                   | 适合谁        |
+| ------------------------------------------------------------- | ---------------------- | ------------- |
+| **[RUNBOOK.md](docs/runbook/RUNBOOK.md)**                     | 完整技术栈规范         | 所有人必读    |
+| **[QUICK_START.md](docs/runbook/QUICK_START.md)**             | 30分钟快速搭建         | 新项目起步    |
+| **[AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md)** | Agent协作最佳实践      | 使用AI开发    |
+| **[DOCKER.md](docs/runbook/DOCKER.md)**                       | Docker容器化开发       | 本地测试/部署 |
+| **[UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md)**       | UI开发工作流           | 前端开发      |
+| **[SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md)**                   | Claude Code Skills推荐 | 扩展能力      |
 
 ---
 
@@ -30,15 +30,15 @@ Fawkes 是一套完整的技术栈规范和工具集，让你可以：
 
 ## 技术栈
 
-| 层级 | 技术 |
-|------|------|
-| Web | Next.js 14 + TypeScript |
-| Mobile | Expo (React Native) |
-| 共享UI | NativeWind + shadcn/ui |
-| 后端 | AWS Lambda + API Gateway |
-| 数据库 | DynamoDB / Aurora Serverless |
-| 基础设施 | AWS CDK |
-| Monorepo | pnpm + Turborepo |
+| 层级     | 技术                         |
+| -------- | ---------------------------- |
+| Web      | Next.js 14 + TypeScript      |
+| Mobile   | Expo (React Native)          |
+| 共享UI   | NativeWind + shadcn/ui       |
+| 后端     | AWS Lambda + API Gateway     |
+| 数据库   | DynamoDB / Aurora Serverless |
+| 基础设施 | AWS CDK                      |
+| Monorepo | pnpm + Turborepo             |
 
 ## 快速开始
 
@@ -94,14 +94,14 @@ fawkes/
 
 ## 文档
 
-| 文档 | 说明 |
-|------|------|
-| [RUNBOOK.md](docs/runbook/RUNBOOK.md) | 完整的开发规范 |
-| [QUICK_START.md](docs/runbook/QUICK_START.md) | 快速搭建指南 |
-| [AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md) | Agent交互最佳实践 |
-| [Feature Spec模板](skills/fawkes/references/feature-spec-template.md) | 功能规格模板 |
-| [UI Patterns](skills/fawkes/references/ui-patterns.md) | UI模式参考 |
-| [Testing Guide](skills/fawkes/references/testing-guide.md) | 测试指南 |
+| 文档                                                                  | 说明              |
+| --------------------------------------------------------------------- | ----------------- |
+| [RUNBOOK.md](docs/runbook/RUNBOOK.md)                                 | 完整的开发规范    |
+| [QUICK_START.md](docs/runbook/QUICK_START.md)                         | 快速搭建指南      |
+| [AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md)             | Agent交互最佳实践 |
+| [Feature Spec模板](skills/fawkes/references/feature-spec-template.md) | 功能规格模板      |
+| [UI Patterns](skills/fawkes/references/ui-patterns.md)                | UI模式参考        |
+| [Testing Guide](skills/fawkes/references/testing-guide.md)            | 测试指南          |
 
 ## 与Agent协作
 
@@ -119,6 +119,7 @@ fawkes/
 **Spec**: 请先阅读 `docs/specs/comment-spec.md`
 
 **步骤**:
+
 1. 在 `packages/schemas/` 创建 Schema
 2. 在 `services/backend/` 实现业务逻辑
 3. 在 `apps/web/` 实现前端

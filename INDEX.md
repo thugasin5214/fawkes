@@ -7,34 +7,38 @@
 ## 📚 Documentation
 
 ### Core Docs
-| File | Description |
-|------|-------------|
-| [docs/runbook/RUNBOOK.md](docs/runbook/RUNBOOK.md) | **Main doc** - Tech stack, structure, commands |
-| [docs/runbook/QUICK_START.md](docs/runbook/QUICK_START.md) | 30-minute quick setup guide |
-| [docs/runbook/AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md) | Agent collaboration best practices |
-| [docs/runbook/DOCKER.md](docs/runbook/DOCKER.md) | Docker containerization guide |
-| [docs/runbook/UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md) | UI workflow (v0.dev + Storybook) |
-| [docs/runbook/UI_DEVELOPMENT_CONFIG.md](docs/runbook/UI_DEVELOPMENT_CONFIG.md) | UI development configuration |
+
+| File                                                                           | Description                                    |
+| ------------------------------------------------------------------------------ | ---------------------------------------------- |
+| [docs/runbook/RUNBOOK.md](docs/runbook/RUNBOOK.md)                             | **Main doc** - Tech stack, structure, commands |
+| [docs/runbook/QUICK_START.md](docs/runbook/QUICK_START.md)                     | 30-minute quick setup guide                    |
+| [docs/runbook/AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md)         | Agent collaboration best practices             |
+| [docs/runbook/DOCKER.md](docs/runbook/DOCKER.md)                               | Docker containerization guide                  |
+| [docs/runbook/UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md)               | UI workflow (v0.dev + Storybook)               |
+| [docs/runbook/UI_DEVELOPMENT_CONFIG.md](docs/runbook/UI_DEVELOPMENT_CONFIG.md) | UI development configuration                   |
 
 ### References
-| File | Description |
-|------|-------------|
-| [docs/SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md) | Claude Code Skills usage guide |
-| [docs/specs/todo-feature-spec.md](docs/specs/todo-feature-spec.md) | Feature spec example (Todo) |
+
+| File                                                               | Description                    |
+| ------------------------------------------------------------------ | ------------------------------ |
+| [docs/SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md)                       | Claude Code Skills usage guide |
+| [docs/specs/todo-feature-spec.md](docs/specs/todo-feature-spec.md) | Feature spec example (Todo)    |
 
 ---
 
 ## 🛠️ Skills (Claude Code)
 
 ### Custom Skill
-| File | Description |
-|------|-------------|
-| [skills/fawkes/SKILL.md](skills/fawkes/SKILL.md) | Fawkes main skill |
+
+| File                                                                                                   | Description           |
+| ------------------------------------------------------------------------------------------------------ | --------------------- |
+| [skills/fawkes/SKILL.md](skills/fawkes/SKILL.md)                                                       | Fawkes main skill     |
 | [skills/fawkes/references/feature-spec-template.md](skills/fawkes/references/feature-spec-template.md) | Feature spec template |
-| [skills/fawkes/references/ui-patterns.md](skills/fawkes/references/ui-patterns.md) | UI patterns reference |
-| [skills/fawkes/references/testing-guide.md](skills/fawkes/references/testing-guide.md) | Testing guide |
+| [skills/fawkes/references/ui-patterns.md](skills/fawkes/references/ui-patterns.md)                     | UI patterns reference |
+| [skills/fawkes/references/testing-guide.md](skills/fawkes/references/testing-guide.md)                 | Testing guide         |
 
 ### Recommended External Skills
+
 ```bash
 # Vercel Labs Skills (recommended)
 npx add-skill vercel-labs/agent-skills
@@ -50,6 +54,7 @@ npx add-skill vercel-labs/agent-skills
 ## 📦 Code Structure
 
 ### Frontend
+
 ```
 apps/
 ├── web/                    # Next.js web app
@@ -68,6 +73,7 @@ apps/
 ```
 
 ### Shared Packages
+
 ```
 packages/
 ├── ui/                     # Cross-platform UI components
@@ -85,6 +91,7 @@ packages/
 ```
 
 ### Backend
+
 ```
 services/
 └── backend/
@@ -99,6 +106,7 @@ services/
 ```
 
 ### Infrastructure
+
 ```
 infra/
 └── cdk/
@@ -112,13 +120,13 @@ infra/
 
 ## ⚙️ Config Files
 
-| File | Description |
-|------|-------------|
-| [package.json](package.json) | Root config, all commands |
-| [pnpm-workspace.yaml](pnpm-workspace.yaml) | Monorepo workspace |
-| [turbo.json](turbo.json) | Turborepo config |
-| [docker-compose.yml](docker-compose.yml) | Docker service definitions |
-| [.github/workflows/ci.yml](.github/workflows/ci.yml) | CI/CD config |
+| File                                                 | Description                |
+| ---------------------------------------------------- | -------------------------- |
+| [package.json](package.json)                         | Root config, all commands  |
+| [pnpm-workspace.yaml](pnpm-workspace.yaml)           | Monorepo workspace         |
+| [turbo.json](turbo.json)                             | Turborepo config           |
+| [docker-compose.yml](docker-compose.yml)             | Docker service definitions |
+| [.github/workflows/ci.yml](.github/workflows/ci.yml) | CI/CD config               |
 
 ---
 
@@ -156,15 +164,18 @@ pnpm cdk:deploy:prod
 ## 🔗 External Resources
 
 ### Design Tools
+
 - [v0.dev](https://v0.dev) - AI-generated React UI
 - [shadcn/ui](https://ui.shadcn.com) - Component library
 - [Tailwind CSS](https://tailwindcss.com) - Styling
 
 ### Agent Skills
+
 - [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) - React best practices
 - [MCP Servers](https://github.com/modelcontextprotocol/servers) - MCP integration
 
 ### Documentation
+
 - [Next.js Docs](https://nextjs.org/docs)
 - [Expo Docs](https://docs.expo.dev)
 - [AWS CDK Docs](https://docs.aws.amazon.com/cdk)

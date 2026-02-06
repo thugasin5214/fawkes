@@ -9,6 +9,7 @@
 ```
 
 **关键洞察**：
+
 - Agent擅长：按规则组合组件、实现交互逻辑、遵循设计系统
 - Agent不擅长：原创视觉设计、审美判断
 - 你不需要会设计，你需要会**选择**和**描述**
@@ -19,12 +20,12 @@
 
 ### 推荐方案
 
-| 方案 | 适用场景 | 特点 |
-|------|---------|------|
-| **shadcn/ui** ⭐ | Web应用 | 可复制代码、高度可定制、Agent友好 |
-| **Radix UI** | 需要无样式基础 | 只有行为、自己加样式 |
-| **Tailwind UI** | 需要更多模板 | 付费、高质量模板 |
-| **Tamagui** | 跨平台 | React Native + Web统一 |
+| 方案             | 适用场景       | 特点                              |
+| ---------------- | -------------- | --------------------------------- |
+| **shadcn/ui** ⭐ | Web应用        | 可复制代码、高度可定制、Agent友好 |
+| **Radix UI**     | 需要无样式基础 | 只有行为、自己加样式              |
+| **Tailwind UI**  | 需要更多模板   | 付费、高质量模板                  |
+| **Tamagui**      | 跨平台         | React Native + Web统一            |
 
 ### 为什么shadcn/ui对Agent最友好？
 
@@ -36,13 +37,10 @@
 export function Button({ variant, size, ...props }) {
   return (
     <button
-      className={cn(
-        buttonVariants({ variant, size }),
-        props.className
-      )}
+      className={cn(buttonVariants({ variant, size }), props.className)}
       {...props}
     />
-  )
+  );
 }
 ```
 
@@ -65,6 +63,7 @@ npx shadcn@latest add button card dialog form input
 Vercel的AI UI生成工具：https://v0.dev
 
 **工作流**：
+
 ```
 1. 用自然语言描述你想要的UI
 2. v0生成React + Tailwind + shadcn/ui代码
@@ -75,6 +74,7 @@ Vercel的AI UI生成工具：https://v0.dev
 ### 示例
 
 **你的描述**：
+
 ```
 A dashboard with:
 - Sidebar navigation on the left
@@ -93,6 +93,7 @@ A dashboard with:
 **参考**: 我从v0.dev生成了这个组件 [粘贴代码]
 
 **修改需求**:
+
 1. 把颜色改成我们的设计token
 2. 添加loading状态
 3. 添加空状态
@@ -124,7 +125,7 @@ pnpm storybook
   你: "改一下按钮样式"
   Agent: [修改代码]
   你: 要刷新整个app，导航到那个页面，才能看到效果
-  
+
 有Storybook:
   你: "改一下按钮样式"
   Agent: [修改代码]
@@ -145,39 +146,46 @@ pnpm storybook  # 打开 http://localhost:6006
 
 ```tsx
 // components/ui/Button.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from './Button'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./Button";
 
 const meta: Meta<typeof Button> = {
-  title: 'UI/Button',
+  title: "UI/Button",
   component: Button,
   // 自动生成所有props的控制面板
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link']
+      control: "select",
+      options: [
+        "default",
+        "destructive",
+        "outline",
+        "secondary",
+        "ghost",
+        "link",
+      ],
     },
     size: {
-      control: 'select', 
-      options: ['default', 'sm', 'lg', 'icon']
-    }
-  }
-}
+      control: "select",
+      options: ["default", "sm", "lg", "icon"],
+    },
+  },
+};
 
-export default meta
+export default meta;
 
 // 各种状态的预览
 export const Default: StoryObj<typeof Button> = {
-  args: { children: 'Button' }
-}
+  args: { children: "Button" },
+};
 
 export const Destructive: StoryObj<typeof Button> = {
-  args: { variant: 'destructive', children: 'Delete' }
-}
+  args: { variant: "destructive", children: "Delete" },
+};
 
 export const Loading: StoryObj<typeof Button> = {
-  args: { children: 'Loading...', disabled: true }
-}
+  args: { children: "Loading...", disabled: true },
+};
 
 // 所有变体一览
 export const AllVariants: StoryObj<typeof Button> = {
@@ -190,8 +198,8 @@ export const AllVariants: StoryObj<typeof Button> = {
       <Button variant="ghost">Ghost</Button>
       <Button variant="link">Link</Button>
     </div>
-  )
-}
+  ),
+};
 ```
 
 ---
@@ -203,7 +211,8 @@ export const AllVariants: StoryObj<typeof Button> = {
 ```markdown
 ## 任务：创建 [页面名称]
 
-**参考设计**: 
+**参考设计**:
+
 - v0.dev链接: [如果有]
 - 参考截图: [如果有]
 - 类似的网站: [如果有]
@@ -212,6 +221,7 @@ export const AllVariants: StoryObj<typeof Button> = {
 
 **页面结构**:
 ```
+
 Header
 ├── Logo
 ├── Navigation
@@ -223,6 +233,7 @@ Main Content
 └── Section 3: [描述]
 
 Footer (可选)
+
 ```
 
 **状态**:
@@ -248,13 +259,15 @@ Footer (可选)
 
 **当前问题**: [描述你不满意的地方]
 
-**期望效果**: 
+**期望效果**:
+
 - [具体描述1]
 - [具体描述2]
 
 **参考**: [截图/链接/描述]
 
 **约束**:
+
 - 不要改变整体布局
 - 保持现有的交互逻辑
 - 只修改样式
@@ -270,14 +283,17 @@ Footer (可选)
 **参考**: [URL或描述]
 
 **我喜欢的部分**:
+
 - [具体元素1]
 - [具体元素2]
 
 **需要调整的**:
+
 - [调整点1]
 - [调整点2]
 
 **技术约束**:
+
 - 使用shadcn/ui组件
 - 使用Tailwind CSS
 - 支持暗色模式
@@ -307,6 +323,7 @@ npx chromatic --project-token=xxx
 ```
 
 Chromatic会：
+
 - 对每个story截图
 - 与上次对比
 - 高亮变化
@@ -316,19 +333,19 @@ Chromatic会：
 
 ```typescript
 // e2e/visual.spec.ts
-import { test, expect } from '@playwright/test'
+import { test, expect } from "@playwright/test";
 
-test('homepage visual', async ({ page }) => {
-  await page.goto('/')
-  
+test("homepage visual", async ({ page }) => {
+  await page.goto("/");
+
   // 等待加载完成
-  await page.waitForLoadState('networkidle')
-  
+  await page.waitForLoadState("networkidle");
+
   // 截图对比
-  await expect(page).toHaveScreenshot('homepage.png', {
-    maxDiffPixels: 100  // 允许100像素差异
-  })
-})
+  await expect(page).toHaveScreenshot("homepage.png", {
+    maxDiffPixels: 100, // 允许100像素差异
+  });
+});
 ```
 
 ```bash
@@ -424,24 +441,24 @@ Step 5: 视觉验证
 
 ```yaml
 设计参考:
-  - v0.dev              # AI生成初始UI
-  - Dribbble/Mobbin     # 找设计灵感
-  - 竞品截图             # 参考现有产品
+  - v0.dev # AI生成初始UI
+  - Dribbble/Mobbin # 找设计灵感
+  - 竞品截图 # 参考现有产品
 
 组件库:
-  - shadcn/ui           # 主力组件库
-  - Radix UI            # 底层primitives
-  - Lucide Icons        # 图标
+  - shadcn/ui # 主力组件库
+  - Radix UI # 底层primitives
+  - Lucide Icons # 图标
 
 开发预览:
-  - Next.js dev server  # 热重载
-  - Storybook           # 组件预览
-  - Expo Go             # 移动端预览
+  - Next.js dev server # 热重载
+  - Storybook # 组件预览
+  - Expo Go # 移动端预览
 
 视觉验证:
-  - 手动截图对比         # 最简单
-  - Chromatic           # Storybook视觉测试
-  - Playwright          # E2E视觉测试
+  - 手动截图对比 # 最简单
+  - Chromatic # Storybook视觉测试
+  - Playwright # E2E视觉测试
 ```
 
 ---

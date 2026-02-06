@@ -58,6 +58,7 @@ pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm cdk:synth
 **Spec**: 请先阅读 `docs/specs/[feature]-spec.md`
 
 **步骤**:
+
 1. 在 `packages/schemas/src/` 创建 Schema
 2. 在 `services/backend/src/domain/` 实现业务逻辑
 3. 在 `services/backend/src/handlers/` 创建 API Handler
@@ -66,6 +67,7 @@ pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm cdk:synth
 **验证**: 每完成一步，运行 `pnpm lint && pnpm test && pnpm build`
 
 **约束**:
+
 - 严格按照spec实现
 - 不要添加spec中没有的功能
 - 保持代码风格一致
@@ -73,7 +75,7 @@ pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm cdk:synth
 
 ### 模板2：修改UI
 
-```markdown
+````markdown
 ## 任务：修改 [Feature] 的 [Component]
 
 **Scope**: `apps/web/src/features/[feature]/components/[component].tsx`
@@ -81,21 +83,26 @@ pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm cdk:synth
 **Spec**: 参考 `apps/web/src/features/[feature]/spec.md`
 
 **变更**:
+
 - [ ] 变更点1
 - [ ] 变更点2
 
 **验证**:
+
 ```bash
 pnpm lint
 pnpm test
 pnpm build:web
 ```
+````
 
 **约束**:
+
 - 只修改指定文件
 - 保持现有功能不变
 - 更新相关测试（如有必要）
-```
+
+````
 
 ### 模板3：修复Bug
 
@@ -120,7 +127,7 @@ pnpm build:web
 2. 修复
 3. 验证修复有效
 4. 运行 `pnpm test` 确保没有regression
-```
+````
 
 ### 模板4：添加测试
 
@@ -132,6 +139,7 @@ pnpm build:web
 **测试位置**: `[path]/__tests__/[file].test.ts`
 
 **需要覆盖的场景**:
+
 - [ ] 正常情况
 - [ ] 边界情况
 - [ ] 错误处理
@@ -148,17 +156,20 @@ pnpm build:web
 ### DO ✅
 
 1. **提供清晰的上下文**
+
    ```
    ✅ "在 apps/web/src/features/todo/components/TodoList.tsx 中，
        修改 loading 状态的展示，从 spinner 改为 skeleton"
    ```
 
 2. **引用具体的spec文件**
+
    ```
    ✅ "按照 docs/specs/todo-feature-spec.md 第4节 UI规格 实现"
    ```
 
 3. **指定验证命令**
+
    ```
    ✅ "完成后运行 pnpm lint && pnpm test && pnpm build:web"
    ```
@@ -171,17 +182,20 @@ pnpm build:web
 ### DON'T ❌
 
 1. **模糊的需求**
+
    ```
    ❌ "帮我优化一下这个页面"
    ❌ "让这个功能更好用"
    ```
 
 2. **一次性给太多任务**
+
    ```
    ❌ "帮我把整个用户系统做完，包括注册登录个人资料..."
    ```
 
 3. **不提供spec**
+
    ```
    ❌ "做一个评论功能" (没有spec)
    ```
@@ -219,6 +233,7 @@ Step 3: 分步实现
 
 ```markdown
 "我想修改 TodoList 组件：
+
 1. 文件位置：apps/web/src/features/todo/components/TodoList.tsx
 2. 修改内容：在空状态下显示一个带动画的图标
 3. 参考spec：apps/web/src/features/todo/spec.md
@@ -233,10 +248,12 @@ Step 3: 分步实现
 "Bug：点击完成Todo后，状态没有更新
 
 我已经检查了：
+
 - API返回200，数据正确
 - 问题应该在前端状态更新
 
 可能相关的文件：
+
 - apps/web/src/features/todo/hooks.ts
 - apps/web/src/features/todo/components/TodoItem.tsx
 
@@ -253,6 +270,7 @@ Step 3: 分步实现
 3. Response: { deleted: number }
 
 请按以下顺序实现：
+
 1. 在packages/schemas添加schema
 2. 在services/backend/src/domain添加逻辑
 3. 在services/backend/src/handlers添加handler
@@ -291,6 +309,7 @@ git stash
 [更详细的说明]
 
 关键点：
+
 1. ...
 2. ...
 3. ...

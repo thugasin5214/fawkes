@@ -8,14 +8,14 @@
 
 ## 📖 Documentation
 
-| Doc | Description | Audience |
-|-----|-------------|----------|
-| **[RUNBOOK.md](docs/runbook/RUNBOOK.md)** | Complete tech stack spec | Everyone |
-| **[QUICK_START.md](docs/runbook/QUICK_START.md)** | 30-minute setup guide | New projects |
-| **[AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md)** | AI agent best practices | AI-assisted dev |
-| **[DOCKER.md](docs/runbook/DOCKER.md)** | Docker containerization | Local testing/deploy |
-| **[UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md)** | UI development workflow | Frontend |
-| **[SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md)** | Claude Code Skills | Extended capabilities |
+| Doc                                                           | Description              | Audience              |
+| ------------------------------------------------------------- | ------------------------ | --------------------- |
+| **[RUNBOOK.md](docs/runbook/RUNBOOK.md)**                     | Complete tech stack spec | Everyone              |
+| **[QUICK_START.md](docs/runbook/QUICK_START.md)**             | 30-minute setup guide    | New projects          |
+| **[AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md)** | AI agent best practices  | AI-assisted dev       |
+| **[DOCKER.md](docs/runbook/DOCKER.md)**                       | Docker containerization  | Local testing/deploy  |
+| **[UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md)**       | UI development workflow  | Frontend              |
+| **[SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md)**                   | Claude Code Skills       | Extended capabilities |
 
 ---
 
@@ -32,15 +32,15 @@ Named after Dumbledore's phoenix — reborn from ashes, creates new apps from no
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Web | Next.js 14 + TypeScript |
-| Mobile | Expo (React Native) |
-| Shared UI | NativeWind + shadcn/ui |
-| Backend | AWS Lambda + API Gateway |
-| Database | DynamoDB / Aurora Serverless |
-| Infrastructure | AWS CDK |
-| Monorepo | pnpm + Turborepo |
+| Layer          | Technology                   |
+| -------------- | ---------------------------- |
+| Web            | Next.js 14 + TypeScript      |
+| Mobile         | Expo (React Native)          |
+| Shared UI      | NativeWind + shadcn/ui       |
+| Backend        | AWS Lambda + API Gateway     |
+| Database       | DynamoDB / Aurora Serverless |
+| Infrastructure | AWS CDK                      |
+| Monorepo       | pnpm + Turborepo             |
 
 ## Quick Start
 
@@ -124,6 +124,7 @@ pnpm docker:local-aws
 **Spec**: Read `docs/specs/comment-spec.md` first
 
 **Steps**:
+
 1. Create Schema in `packages/schemas/`
 2. Implement logic in `services/backend/`
 3. Build frontend in `apps/web/`

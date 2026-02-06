@@ -8,9 +8,9 @@ description: |
   - Adding UI components
   - Writing tests
   - Deploying to AWS
-  
+
   Tech stack: Next.js + Expo (React Native) + AWS (Lambda/DynamoDB/CDK) + TypeScript
-  
+
   This skill provides standardized workflows for agent-friendly development.
 ---
 
@@ -54,6 +54,7 @@ mkdir -p apps/mobile/src/features/[name]
 ```
 
 Then implement in this order:
+
 1. Schema (`packages/schemas/src/[name].ts`)
 2. Backend (`services/backend/src/domain/[name].ts`)
 3. API Handler (`services/backend/src/handlers/[name].ts`)
@@ -64,6 +65,7 @@ Then implement in this order:
 ### 2. Modifying Existing UI
 
 Before making changes:
+
 1. Read the feature's `spec.md`
 2. Understand current state (loading/empty/error/success)
 3. Make minimal, focused changes
@@ -74,6 +76,7 @@ Before making changes:
 Location: `packages/ui/src/primitives/` or `packages/ui/src/patterns/`
 
 Component requirements:
+
 - Props interface with TypeScript
 - Works on both Web (react-native-web) and Mobile (React Native)
 - Uses NativeWind (Tailwind) for styling
@@ -82,21 +85,23 @@ Component requirements:
 ### 4. Backend Development
 
 Handler pattern (thin):
+
 ```typescript
 // services/backend/src/handlers/[name].ts
 export const handler: APIGatewayProxyHandler = async (event) => {
   // 1. Parse & validate input
-  const input = Schema.parse(JSON.parse(event.body))
-  
+  const input = Schema.parse(JSON.parse(event.body));
+
   // 2. Call domain logic
-  const result = await domainFunction(input)
-  
+  const result = await domainFunction(input);
+
   // 3. Return response
-  return { statusCode: 200, body: JSON.stringify(result) }
-}
+  return { statusCode: 200, body: JSON.stringify(result) };
+};
 ```
 
 Domain logic (thick, testable):
+
 ```typescript
 // services/backend/src/domain/[name].ts
 export async function domainFunction(input: Input): Promise<Output> {
@@ -138,10 +143,12 @@ When modifying UI, use this structure:
 **Spec**: Read spec.md first
 
 **Changes**:
+
 - [ ] Describe change 1
 - [ ] Describe change 2
 
 **Verify**:
+
 - pnpm lint
 - pnpm test
 - pnpm build:web

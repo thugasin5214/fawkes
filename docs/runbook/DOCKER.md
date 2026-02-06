@@ -10,6 +10,7 @@
 - Docker Compose v2.x
 
 Verify with:
+
 ```bash
 docker --version      # Docker version 20+
 docker compose version  # Docker Compose version v2.x
@@ -53,11 +54,11 @@ docker compose --profile local-aws up
 
 ## 📦 Services
 
-| Service | Port | Profile | Description |
-|---------|------|---------|-------------|
-| `web` | 3000 | (default) | Production Next.js build |
-| `web-dev` | 3000 | `dev` | Development with hot reload |
-| `localstack` | 4566 | `local-aws` | AWS services emulation |
+| Service      | Port | Profile     | Description                 |
+| ------------ | ---- | ----------- | --------------------------- |
+| `web`        | 3000 | (default)   | Production Next.js build    |
+| `web-dev`    | 3000 | `dev`       | Development with hot reload |
+| `localstack` | 4566 | `local-aws` | AWS services emulation      |
 
 ---
 
@@ -185,6 +186,7 @@ curl http://localhost:3000/api/health
 Task: Build and run the web Docker container
 
 Steps:
+
 1. Ensure Docker is running: `docker info`
 2. Build: `docker compose build web`
 3. Run: `docker compose up web -d`

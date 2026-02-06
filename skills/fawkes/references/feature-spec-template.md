@@ -5,9 +5,11 @@
 ## 1. 概述
 
 ### 目的
+
 [这个功能解决什么问题？用一句话描述]
 
 ### 用户故事
+
 ```
 作为 [角色]
 我想要 [功能]
@@ -15,6 +17,7 @@
 ```
 
 ### 范围
+
 - ✅ 包含：[列出包含的内容]
 - ❌ 不包含：[列出明确不包含的内容]
 
@@ -39,6 +42,7 @@ export type [Feature] = z.infer<typeof [Feature]Schema>
 ```
 
 ### 关联关系
+
 - [描述与其他实体的关系]
 
 ---
@@ -47,25 +51,27 @@ export type [Feature] = z.infer<typeof [Feature]Schema>
 
 ### Endpoints
 
-| Method | Path | Description | Auth |
-|--------|------|-------------|------|
-| GET | `/api/[feature]` | 获取列表 | Required |
-| GET | `/api/[feature]/:id` | 获取详情 | Required |
-| POST | `/api/[feature]` | 创建 | Required |
-| PUT | `/api/[feature]/:id` | 更新 | Required |
-| DELETE | `/api/[feature]/:id` | 删除 | Required |
+| Method | Path                 | Description | Auth     |
+| ------ | -------------------- | ----------- | -------- |
+| GET    | `/api/[feature]`     | 获取列表    | Required |
+| GET    | `/api/[feature]/:id` | 获取详情    | Required |
+| POST   | `/api/[feature]`     | 创建        | Required |
+| PUT    | `/api/[feature]/:id` | 更新        | Required |
+| DELETE | `/api/[feature]/:id` | 删除        | Required |
 
 ### Request/Response Examples
 
 #### GET /api/[feature]
 
 Request:
+
 ```http
 GET /api/[feature]?page=1&limit=20
 Authorization: Bearer <token>
 ```
 
 Response:
+
 ```json
 {
   "data": [...],
@@ -80,6 +86,7 @@ Response:
 #### POST /api/[feature]
 
 Request:
+
 ```json
 {
   "field1": "value1",
@@ -88,6 +95,7 @@ Request:
 ```
 
 Response:
+
 ```json
 {
   "id": "uuid",
@@ -112,12 +120,12 @@ Response:
 
 ### 状态定义
 
-| 状态 | 触发条件 | UI表现 |
-|------|---------|--------|
-| Loading | 数据加载中 | Skeleton/Spinner |
-| Empty | data.length === 0 | 空状态插图 + CTA |
-| Error | API返回错误 | 错误提示 + 重试按钮 |
-| Success | 数据正常返回 | 正常列表/内容 |
+| 状态    | 触发条件          | UI表现              |
+| ------- | ----------------- | ------------------- |
+| Loading | 数据加载中        | Skeleton/Spinner    |
+| Empty   | data.length === 0 | 空状态插图 + CTA    |
+| Error   | API返回错误       | 错误提示 + 重试按钮 |
+| Success | 数据正常返回      | 正常列表/内容       |
 
 ### 组件树（列表页示例）
 
@@ -161,13 +169,16 @@ Response:
 ## 5. 业务规则
 
 ### 验证规则
+
 - [字段1]：[验证规则描述]
 - [字段2]：[验证规则描述]
 
 ### 权限规则
+
 - [描述谁可以执行什么操作]
 
 ### 业务逻辑
+
 1. [描述核心业务逻辑1]
 2. [描述核心业务逻辑2]
 
@@ -176,6 +187,7 @@ Response:
 ## 6. 验收标准
 
 ### 功能验收
+
 - [ ] 用户可以查看[feature]列表
 - [ ] 用户可以创建新的[feature]
 - [ ] 用户可以编辑现有[feature]
@@ -183,6 +195,7 @@ Response:
 - [ ] 所有状态（loading/empty/error/success）正常显示
 
 ### 技术验收
+
 - [ ] Schema定义在 `packages/schemas`
 - [ ] API Handler在 `services/backend/src/handlers`
 - [ ] Domain逻辑在 `services/backend/src/domain`
@@ -192,6 +205,7 @@ Response:
 - [ ] `pnpm build` 通过
 
 ### E2E验收（如需要）
+
 - [ ] 冒烟测试：创建→查看→编辑→删除 完整流程
 
 ---
@@ -199,32 +213,35 @@ Response:
 ## 7. 技术Notes
 
 ### 依赖
+
 - [列出需要添加的npm包]
 
 ### 数据库
+
 - Table: `[feature]-table`
 - Primary Key: `id`
 - GSI: [如果需要]
 
 ### 注意事项
+
 - [技术实现需要注意的点]
 
 ---
 
 ## 8. 时间线
 
-| 阶段 | 任务 | 预估 |
-|------|------|------|
-| 1 | Schema + API | 2h |
-| 2 | Backend逻辑 | 4h |
-| 3 | Web UI | 6h |
-| 4 | Mobile UI | 4h |
-| 5 | 测试 | 2h |
+| 阶段 | 任务         | 预估 |
+| ---- | ------------ | ---- |
+| 1    | Schema + API | 2h   |
+| 2    | Backend逻辑  | 4h   |
+| 3    | Web UI       | 6h   |
+| 4    | Mobile UI    | 4h   |
+| 5    | 测试         | 2h   |
 
 ---
 
 ## Changelog
 
-| 日期 | 变更 | 作者 |
-|------|------|------|
+| 日期       | 变更     | 作者   |
+| ---------- | -------- | ------ |
 | YYYY-MM-DD | 初始版本 | [name] |

@@ -9,13 +9,11 @@
     "dev:web": "turbo run dev --filter=web",
     "dev:mobile": "turbo run dev --filter=mobile",
     "dev:backend": "turbo run dev --filter=@repo/backend",
-    
     "========== Build ==========": "",
     "build": "turbo run build",
     "build:web": "turbo run build --filter=web",
     "build:mobile": "turbo run build --filter=mobile",
     "build:backend": "turbo run build --filter=@repo/backend",
-    
     "========== Testing ==========": "",
     "test": "turbo run test",
     "test:unit": "turbo run test:unit",
@@ -24,14 +22,12 @@
     "test:e2e:ui": "playwright test --ui",
     "test:coverage": "turbo run test -- --coverage",
     "test:watch": "turbo run test -- --watch",
-    
     "========== Code Quality ==========": "",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
     "typecheck": "turbo run typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
-    
     "========== Docker ==========": "",
     "docker:build": "docker compose build web",
     "docker:up": "docker compose up web",
@@ -41,7 +37,6 @@
     "docker:local-aws": "docker compose --profile local-aws up",
     "docker:logs": "docker compose logs -f",
     "docker:clean": "docker compose down -v && docker system prune -f",
-    
     "========== Infrastructure ==========": "",
     "cdk:synth": "cd infra/cdk && cdk synth",
     "cdk:diff": "cd infra/cdk && cdk diff",
@@ -49,7 +44,6 @@
     "cdk:deploy:staging": "cd infra/cdk && cdk deploy --context env=staging --require-approval never",
     "cdk:deploy:prod": "cd infra/cdk && cdk deploy --context env=prod",
     "cdk:destroy:dev": "cd infra/cdk && cdk destroy --context env=dev",
-    
     "========== Mobile ==========": "",
     "mobile:start": "cd apps/mobile && expo start",
     "mobile:ios": "cd apps/mobile && expo run:ios",
@@ -58,13 +52,11 @@
     "mobile:build:android": "cd apps/mobile && eas build --platform android",
     "mobile:submit:ios": "cd apps/mobile && eas submit --platform ios",
     "mobile:submit:android": "cd apps/mobile && eas submit --platform android",
-    
     "========== Release ==========": "",
     "release:staging": "pnpm cdk:deploy:staging && pnpm release:web:staging",
     "release:prod": "pnpm cdk:deploy:prod && pnpm release:web:prod",
     "release:web:staging": "cd apps/web && vercel --prod --env staging",
     "release:web:prod": "cd apps/web && vercel --prod",
-    
     "========== Utilities ==========": "",
     "codegen": "turbo run codegen",
     "clean": "turbo run clean && rm -rf node_modules",

@@ -7,34 +7,38 @@
 ## 📚 文档
 
 ### 核心文档
-| 文件 | 说明 |
-|------|------|
-| [docs/runbook/RUNBOOK.md](docs/runbook/RUNBOOK.md) | **主文档** - 技术栈、目录结构、命令规范 |
-| [docs/runbook/QUICK_START.md](docs/runbook/QUICK_START.md) | 30分钟快速搭建指南 |
-| [docs/runbook/AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md) | Agent协作最佳实践 |
-| [docs/runbook/DOCKER.md](docs/runbook/DOCKER.md) | Docker容器化开发指南 |
-| [docs/runbook/UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md) | UI开发工作流（v0.dev + Storybook） |
-| [docs/runbook/UI_DEVELOPMENT_CONFIG.md](docs/runbook/UI_DEVELOPMENT_CONFIG.md) | UI开发具体配置 |
+
+| 文件                                                                           | 说明                                    |
+| ------------------------------------------------------------------------------ | --------------------------------------- |
+| [docs/runbook/RUNBOOK.md](docs/runbook/RUNBOOK.md)                             | **主文档** - 技术栈、目录结构、命令规范 |
+| [docs/runbook/QUICK_START.md](docs/runbook/QUICK_START.md)                     | 30分钟快速搭建指南                      |
+| [docs/runbook/AGENT_INTERACTION.md](docs/runbook/AGENT_INTERACTION.md)         | Agent协作最佳实践                       |
+| [docs/runbook/DOCKER.md](docs/runbook/DOCKER.md)                               | Docker容器化开发指南                    |
+| [docs/runbook/UI_DEVELOPMENT.md](docs/runbook/UI_DEVELOPMENT.md)               | UI开发工作流（v0.dev + Storybook）      |
+| [docs/runbook/UI_DEVELOPMENT_CONFIG.md](docs/runbook/UI_DEVELOPMENT_CONFIG.md) | UI开发具体配置                          |
 
 ### 参考资料
-| 文件 | 说明 |
-|------|------|
-| [docs/SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md) | Claude Code Skills使用指南 |
-| [docs/specs/todo-feature-spec.md](docs/specs/todo-feature-spec.md) | Feature Spec示例（Todo） |
+
+| 文件                                                               | 说明                       |
+| ------------------------------------------------------------------ | -------------------------- |
+| [docs/SKILLS_GUIDE.md](docs/SKILLS_GUIDE.md)                       | Claude Code Skills使用指南 |
+| [docs/specs/todo-feature-spec.md](docs/specs/todo-feature-spec.md) | Feature Spec示例（Todo）   |
 
 ---
 
 ## 🛠️ Skills (Claude Code)
 
 ### 自定义Skill
-| 文件 | 说明 |
-|------|------|
-| [skills/fawkes/SKILL.md](skills/fawkes/SKILL.md) | Fawkes主Skill |
+
+| 文件                                                                                                   | 说明             |
+| ------------------------------------------------------------------------------------------------------ | ---------------- |
+| [skills/fawkes/SKILL.md](skills/fawkes/SKILL.md)                                                       | Fawkes主Skill    |
 | [skills/fawkes/references/feature-spec-template.md](skills/fawkes/references/feature-spec-template.md) | Feature Spec模板 |
-| [skills/fawkes/references/ui-patterns.md](skills/fawkes/references/ui-patterns.md) | UI模式参考 |
-| [skills/fawkes/references/testing-guide.md](skills/fawkes/references/testing-guide.md) | 测试指南 |
+| [skills/fawkes/references/ui-patterns.md](skills/fawkes/references/ui-patterns.md)                     | UI模式参考       |
+| [skills/fawkes/references/testing-guide.md](skills/fawkes/references/testing-guide.md)                 | 测试指南         |
 
 ### 推荐的外部Skills
+
 ```bash
 # Vercel Labs Skills（推荐）
 npx add-skill vercel-labs/agent-skills
@@ -50,6 +54,7 @@ npx add-skill vercel-labs/agent-skills
 ## 📦 代码结构
 
 ### 前端
+
 ```
 apps/
 ├── web/                    # Next.js Web应用
@@ -68,6 +73,7 @@ apps/
 ```
 
 ### 共享包
+
 ```
 packages/
 ├── ui/                     # 跨平台UI组件
@@ -85,6 +91,7 @@ packages/
 ```
 
 ### 后端
+
 ```
 services/
 └── backend/
@@ -99,6 +106,7 @@ services/
 ```
 
 ### 基础设施
+
 ```
 infra/
 └── cdk/
@@ -112,13 +120,13 @@ infra/
 
 ## ⚙️ 配置文件
 
-| 文件 | 说明 |
-|------|------|
-| [package.json](package.json) | 根配置，所有命令定义 |
-| [pnpm-workspace.yaml](pnpm-workspace.yaml) | Monorepo工作区 |
-| [turbo.json](turbo.json) | Turborepo配置 |
-| [docker-compose.yml](docker-compose.yml) | Docker服务定义 |
-| [.github/workflows/ci.yml](.github/workflows/ci.yml) | CI/CD配置 |
+| 文件                                                 | 说明                 |
+| ---------------------------------------------------- | -------------------- |
+| [package.json](package.json)                         | 根配置，所有命令定义 |
+| [pnpm-workspace.yaml](pnpm-workspace.yaml)           | Monorepo工作区       |
+| [turbo.json](turbo.json)                             | Turborepo配置        |
+| [docker-compose.yml](docker-compose.yml)             | Docker服务定义       |
+| [.github/workflows/ci.yml](.github/workflows/ci.yml) | CI/CD配置            |
 
 ---
 
@@ -156,15 +164,18 @@ pnpm cdk:deploy:prod
 ## 🔗 外部资源
 
 ### 设计工具
+
 - [v0.dev](https://v0.dev) - AI生成React UI
 - [shadcn/ui](https://ui.shadcn.com) - 组件库
 - [Tailwind CSS](https://tailwindcss.com) - 样式
 
 ### Agent Skills
+
 - [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) - React最佳实践
 - [MCP Servers](https://github.com/modelcontextprotocol/servers) - MCP集成
 
 ### 文档
+
 - [Next.js Docs](https://nextjs.org/docs)
 - [Expo Docs](https://docs.expo.dev)
 - [AWS CDK Docs](https://docs.aws.amazon.com/cdk)

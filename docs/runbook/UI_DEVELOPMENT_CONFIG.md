@@ -17,26 +17,23 @@ pnpm add -D @storybook/addon-styling-webpack
 
 ```typescript
 // .storybook/main.ts
-import type { StorybookConfig } from '@storybook/nextjs'
+import type { StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-  ],
+  stories: ["../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  addons: ["@storybook/addon-essentials", "@storybook/addon-interactions"],
   framework: {
-    name: '@storybook/nextjs',
+    name: "@storybook/nextjs",
     options: {},
   },
-}
+};
 
-export default config
+export default config;
 ```
 
 ```typescript
 // .storybook/preview.ts
-import '../src/app/globals.css'  // 你的Tailwind CSS
+import "../src/app/globals.css"; // 你的Tailwind CSS
 
 const preview = {
   parameters: {
@@ -48,16 +45,16 @@ const preview = {
     },
     // 添加暗色模式支持
     backgrounds: {
-      default: 'light',
+      default: "light",
       values: [
-        { name: 'light', value: '#ffffff' },
-        { name: 'dark', value: '#1a1a1a' },
+        { name: "light", value: "#ffffff" },
+        { name: "dark", value: "#1a1a1a" },
       ],
     },
   },
-}
+};
 
-export default preview
+export default preview;
 ```
 
 ---
@@ -68,39 +65,46 @@ export default preview
 
 ```tsx
 // src/components/ui/Button.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from './button'
-import { Loader2, Mail, Plus } from 'lucide-react'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./button";
+import { Loader2, Mail, Plus } from "lucide-react";
 
 const meta: Meta<typeof Button> = {
-  title: 'UI/Button',
+  title: "UI/Button",
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
+      control: "select",
+      options: [
+        "default",
+        "destructive",
+        "outline",
+        "secondary",
+        "ghost",
+        "link",
+      ],
     },
     size: {
-      control: 'select',
-      options: ['default', 'sm', 'lg', 'icon'],
+      control: "select",
+      options: ["default", "sm", "lg", "icon"],
     },
-    disabled: { control: 'boolean' },
+    disabled: { control: "boolean" },
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof Button>
+export default meta;
+type Story = StoryObj<typeof Button>;
 
 // 基础
 export const Default: Story = {
   args: {
-    children: 'Button',
+    children: "Button",
   },
-}
+};
 
 // 所有变体
 export const AllVariants: Story = {
@@ -116,7 +120,7 @@ export const AllVariants: Story = {
       </div>
     </div>
   ),
-}
+};
 
 // 带图标
 export const WithIcon: Story = {
@@ -130,7 +134,7 @@ export const WithIcon: Story = {
       </Button>
     </div>
   ),
-}
+};
 
 // Loading状态
 export const Loading: Story = {
@@ -140,7 +144,7 @@ export const Loading: Story = {
       Please wait
     </Button>
   ),
-}
+};
 
 // 所有尺寸
 export const AllSizes: Story = {
@@ -149,31 +153,33 @@ export const AllSizes: Story = {
       <Button size="lg">Large</Button>
       <Button size="default">Default</Button>
       <Button size="sm">Small</Button>
-      <Button size="icon"><Plus className="h-4 w-4" /></Button>
+      <Button size="icon">
+        <Plus className="h-4 w-4" />
+      </Button>
     </div>
   ),
-}
+};
 ```
 
 ### 页面/Feature Story
 
 ```tsx
 // src/features/todo/TodoList.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react'
-import { TodoList } from './components/TodoList'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import type { Meta, StoryObj } from "@storybook/react";
+import { TodoList } from "./components/TodoList";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Mock数据
 const mockTodos = [
-  { id: '1', title: 'Learn Storybook', completed: true },
-  { id: '2', title: 'Build awesome UI', completed: false },
-  { id: '3', title: 'Ship to production', completed: false },
-]
+  { id: "1", title: "Learn Storybook", completed: true },
+  { id: "2", title: "Build awesome UI", completed: false },
+  { id: "3", title: "Ship to production", completed: false },
+];
 
 // Provider包装
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false } },
-})
+});
 
 const withProviders = (Story: any) => (
   <QueryClientProvider client={queryClient}>
@@ -181,19 +187,19 @@ const withProviders = (Story: any) => (
       <Story />
     </div>
   </QueryClientProvider>
-)
+);
 
 const meta: Meta<typeof TodoList> = {
-  title: 'Features/Todo/TodoList',
+  title: "Features/Todo/TodoList",
   component: TodoList,
   decorators: [withProviders],
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof TodoList>
+export default meta;
+type Story = StoryObj<typeof TodoList>;
 
 // 正常状态（带数据）
 export const WithData: Story = {
@@ -202,7 +208,7 @@ export const WithData: Story = {
     isLoading: false,
     error: null,
   },
-}
+};
 
 // Loading状态
 export const Loading: Story = {
@@ -211,7 +217,7 @@ export const Loading: Story = {
     isLoading: true,
     error: null,
   },
-}
+};
 
 // 空状态
 export const Empty: Story = {
@@ -220,16 +226,16 @@ export const Empty: Story = {
     isLoading: false,
     error: null,
   },
-}
+};
 
 // 错误状态
 export const Error: Story = {
   args: {
     todos: [],
     isLoading: false,
-    error: new Error('Failed to load todos'),
+    error: new Error("Failed to load todos"),
   },
-}
+};
 
 // 移动端视图
 export const Mobile: Story = {
@@ -240,10 +246,10 @@ export const Mobile: Story = {
   },
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1',
+      defaultViewport: "mobile1",
     },
   },
-}
+};
 ```
 
 ---
@@ -254,12 +260,12 @@ export const Mobile: Story = {
 
 ```typescript
 // playwright.config.ts
-import { defineConfig, devices } from '@playwright/test'
+import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: './e2e',
-  snapshotDir: './e2e/__snapshots__',
-  
+  testDir: "./e2e",
+  snapshotDir: "./e2e/__snapshots__",
+
   // 视觉测试配置
   expect: {
     toHaveScreenshot: {
@@ -267,54 +273,62 @@ export default defineConfig({
       threshold: 0.2,
     },
   },
-  
+
   projects: [
     {
-      name: 'Desktop Chrome',
-      use: { ...devices['Desktop Chrome'] },
+      name: "Desktop Chrome",
+      use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
+      name: "Mobile Safari",
+      use: { ...devices["iPhone 12"] },
     },
   ],
-})
+});
 ```
 
 ```typescript
 // e2e/visual/components.spec.ts
-import { test, expect } from '@playwright/test'
+import { test, expect } from "@playwright/test";
 
-test.describe('Component Visual Tests', () => {
+test.describe("Component Visual Tests", () => {
   test.beforeEach(async ({ page }) => {
     // 打开Storybook
-    await page.goto('http://localhost:6006')
-  })
+    await page.goto("http://localhost:6006");
+  });
 
-  test('Button - All Variants', async ({ page }) => {
+  test("Button - All Variants", async ({ page }) => {
     // 导航到Button story
-    await page.goto('http://localhost:6006/?path=/story/ui-button--all-variants')
-    
-    // 等待渲染
-    await page.waitForSelector('[data-story-rendered="true"]')
-    
-    // 截图对比
-    const frame = page.frameLocator('#storybook-preview-iframe')
-    await expect(frame.locator('#storybook-root')).toHaveScreenshot('button-all-variants.png')
-  })
+    await page.goto(
+      "http://localhost:6006/?path=/story/ui-button--all-variants",
+    );
 
-  test('TodoList - All States', async ({ page }) => {
-    const states = ['with-data', 'loading', 'empty', 'error']
-    
+    // 等待渲染
+    await page.waitForSelector('[data-story-rendered="true"]');
+
+    // 截图对比
+    const frame = page.frameLocator("#storybook-preview-iframe");
+    await expect(frame.locator("#storybook-root")).toHaveScreenshot(
+      "button-all-variants.png",
+    );
+  });
+
+  test("TodoList - All States", async ({ page }) => {
+    const states = ["with-data", "loading", "empty", "error"];
+
     for (const state of states) {
-      await page.goto(`http://localhost:6006/?path=/story/features-todo-todolist--${state}`)
-      await page.waitForSelector('[data-story-rendered="true"]')
-      
-      const frame = page.frameLocator('#storybook-preview-iframe')
-      await expect(frame.locator('#storybook-root')).toHaveScreenshot(`todolist-${state}.png`)
+      await page.goto(
+        `http://localhost:6006/?path=/story/features-todo-todolist--${state}`,
+      );
+      await page.waitForSelector('[data-story-rendered="true"]');
+
+      const frame = page.frameLocator("#storybook-preview-iframe");
+      await expect(frame.locator("#storybook-root")).toHaveScreenshot(
+        `todolist-${state}.png`,
+      );
     }
-  })
-})
+  });
+});
 ```
 
 ### 运行命令
@@ -397,85 +411,85 @@ export const tokens = {
   colors: {
     // 语义化颜色
     primary: {
-      DEFAULT: 'hsl(222.2 47.4% 11.2%)',
-      foreground: 'hsl(210 40% 98%)',
+      DEFAULT: "hsl(222.2 47.4% 11.2%)",
+      foreground: "hsl(210 40% 98%)",
     },
     secondary: {
-      DEFAULT: 'hsl(210 40% 96.1%)',
-      foreground: 'hsl(222.2 47.4% 11.2%)',
+      DEFAULT: "hsl(210 40% 96.1%)",
+      foreground: "hsl(222.2 47.4% 11.2%)",
     },
     destructive: {
-      DEFAULT: 'hsl(0 84.2% 60.2%)',
-      foreground: 'hsl(210 40% 98%)',
+      DEFAULT: "hsl(0 84.2% 60.2%)",
+      foreground: "hsl(210 40% 98%)",
     },
     muted: {
-      DEFAULT: 'hsl(210 40% 96.1%)',
-      foreground: 'hsl(215.4 16.3% 46.9%)',
+      DEFAULT: "hsl(210 40% 96.1%)",
+      foreground: "hsl(215.4 16.3% 46.9%)",
     },
     accent: {
-      DEFAULT: 'hsl(210 40% 96.1%)',
-      foreground: 'hsl(222.2 47.4% 11.2%)',
+      DEFAULT: "hsl(210 40% 96.1%)",
+      foreground: "hsl(222.2 47.4% 11.2%)",
     },
     // 功能性颜色
-    background: 'hsl(0 0% 100%)',
-    foreground: 'hsl(222.2 47.4% 11.2%)',
-    card: 'hsl(0 0% 100%)',
-    border: 'hsl(214.3 31.8% 91.4%)',
-    input: 'hsl(214.3 31.8% 91.4%)',
-    ring: 'hsl(222.2 47.4% 11.2%)',
+    background: "hsl(0 0% 100%)",
+    foreground: "hsl(222.2 47.4% 11.2%)",
+    card: "hsl(0 0% 100%)",
+    border: "hsl(214.3 31.8% 91.4%)",
+    input: "hsl(214.3 31.8% 91.4%)",
+    ring: "hsl(222.2 47.4% 11.2%)",
   },
-  
+
   radius: {
-    sm: '0.25rem',
-    DEFAULT: '0.5rem',
-    md: '0.5rem',
-    lg: '0.75rem',
-    full: '9999px',
+    sm: "0.25rem",
+    DEFAULT: "0.5rem",
+    md: "0.5rem",
+    lg: "0.75rem",
+    full: "9999px",
   },
-  
+
   spacing: {
-    px: '1px',
-    0: '0',
-    0.5: '0.125rem',
-    1: '0.25rem',
-    1.5: '0.375rem',
-    2: '0.5rem',
-    2.5: '0.625rem',
-    3: '0.75rem',
-    3.5: '0.875rem',
-    4: '1rem',
-    5: '1.25rem',
-    6: '1.5rem',
-    7: '1.75rem',
-    8: '2rem',
-    9: '2.25rem',
-    10: '2.5rem',
-    12: '3rem',
-    14: '3.5rem',
-    16: '4rem',
-    20: '5rem',
-    24: '6rem',
-    28: '7rem',
-    32: '8rem',
+    px: "1px",
+    0: "0",
+    0.5: "0.125rem",
+    1: "0.25rem",
+    1.5: "0.375rem",
+    2: "0.5rem",
+    2.5: "0.625rem",
+    3: "0.75rem",
+    3.5: "0.875rem",
+    4: "1rem",
+    5: "1.25rem",
+    6: "1.5rem",
+    7: "1.75rem",
+    8: "2rem",
+    9: "2.25rem",
+    10: "2.5rem",
+    12: "3rem",
+    14: "3.5rem",
+    16: "4rem",
+    20: "5rem",
+    24: "6rem",
+    28: "7rem",
+    32: "8rem",
   },
-  
+
   typography: {
     fontFamily: {
-      sans: ['Inter', 'system-ui', 'sans-serif'],
-      mono: ['JetBrains Mono', 'monospace'],
+      sans: ["Inter", "system-ui", "sans-serif"],
+      mono: ["JetBrains Mono", "monospace"],
     },
     fontSize: {
-      xs: ['0.75rem', { lineHeight: '1rem' }],
-      sm: ['0.875rem', { lineHeight: '1.25rem' }],
-      base: ['1rem', { lineHeight: '1.5rem' }],
-      lg: ['1.125rem', { lineHeight: '1.75rem' }],
-      xl: ['1.25rem', { lineHeight: '1.75rem' }],
-      '2xl': ['1.5rem', { lineHeight: '2rem' }],
-      '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-      '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+      xs: ["0.75rem", { lineHeight: "1rem" }],
+      sm: ["0.875rem", { lineHeight: "1.25rem" }],
+      base: ["1rem", { lineHeight: "1.5rem" }],
+      lg: ["1.125rem", { lineHeight: "1.75rem" }],
+      xl: ["1.25rem", { lineHeight: "1.75rem" }],
+      "2xl": ["1.5rem", { lineHeight: "2rem" }],
+      "3xl": ["1.875rem", { lineHeight: "2.25rem" }],
+      "4xl": ["2.25rem", { lineHeight: "2.5rem" }],
     },
   },
-}
+};
 
 // 生成Tailwind配置
 export function generateTailwindConfig() {
@@ -487,7 +501,7 @@ export function generateTailwindConfig() {
         fontFamily: tokens.typography.fontFamily,
       },
     },
-  }
+  };
 }
 
 // 生成CSS变量
@@ -518,7 +532,7 @@ export function generateCSSVariables() {
   --foreground: 210 40% 98%;
   /* ... dark mode colors */
 }
-  `
+  `;
 }
 ```
 
@@ -531,14 +545,14 @@ export function generateCSSVariables() {
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    
+
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    
+
     "test:visual": "playwright test e2e/visual",
     "test:visual:update": "playwright test e2e/visual --update-snapshots",
     "test:visual:report": "playwright show-report",
-    
+
     "ui:import": "bash ../../tools/scripts/import-v0.sh"
   }
 }
