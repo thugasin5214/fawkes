@@ -1,4 +1,8 @@
-import type { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
+import type {
+  APIGatewayProxyHandler,
+  APIGatewayProxyResult,
+  APIGatewayProxyEvent,
+} from "aws-lambda";
 import { CreateTodoSchema, UpdateTodoSchema } from "@repo/schemas";
 import {
   createTodo,
@@ -22,11 +26,10 @@ const response = (
 });
 
 // 辅助函数：从event获取用户ID（实际项目中从JWT解析）
-const getUserId = (event: {
-  requestContext?: { authorizer?: { claims?: { sub?: string } } };
-}): string => {
+const getUserId = (event: APIGatewayProxyEvent): string => {
   // TODO: 实际项目中从Authorization header解析JWT
-  return event.requestContext?.authorizer?.claims?.sub || "anonymous";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (event.requestContext?.authorizer as any)?.claims?.sub || "anonymous";
 };
 
 /**
