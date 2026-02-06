@@ -35,7 +35,7 @@ export class ApiStack extends cdk.Stack {
     // Lambda Functions
     // ============================================
     const runtime = lambda.Runtime.NODEJS_20_X;
-    const code = lambda.Code.fromAsset("../services/backend/dist");
+    const code = lambda.Code.fromAsset("../../services/backend/dist");
     const commonEnv = {
       TODOS_TABLE_NAME: this.todosTable.tableName,
       NODE_OPTIONS: "--enable-source-maps",
