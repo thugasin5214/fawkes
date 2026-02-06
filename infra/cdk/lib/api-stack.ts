@@ -33,58 +33,73 @@ export class ApiStack extends cdk.Stack {
     // ============================================
     // Lambda Functions
     // ============================================
-    const commonLambdaProps: Partial<lambda.FunctionProps> = {
-      runtime: lambda.Runtime.NODEJS_20_X,
-      memorySize: 256,
-      timeout: cdk.Duration.seconds(10),
-      environment: {
-        TODOS_TABLE_NAME: this.todosTable.tableName,
-        NODE_OPTIONS: '--enable-source-maps',
-      },
+    const runtime = lambda.Runtime.NODEJS_20_X
+    const code = lambda.Code.fromAsset('../services/backend/dist')
+    const commonEnv = {
+      TODOS_TABLE_NAME: this.todosTable.tableName,
+      NODE_OPTIONS: '--enable-source-maps',
     }
 
     // Health check
     const healthHandler = new lambda.Function(this, 'HealthHandler', {
-      ...commonLambdaProps,
+      runtime,
+      code,
+      memorySize: 256,
+      timeout: cdk.Duration.seconds(10),
+      environment: commonEnv,
       functionName: `health-${environment}`,
       handler: 'health.handler',
-      code: lambda.Code.fromAsset('../services/backend/dist'),
     })
 
     // Todo handlers
     const todoListHandler = new lambda.Function(this, 'TodoListHandler', {
-      ...commonLambdaProps,
+      runtime,
+      code,
+      memorySize: 256,
+      timeout: cdk.Duration.seconds(10),
+      environment: commonEnv,
       functionName: `todo-list-${environment}`,
       handler: 'todo.listHandler',
-      code: lambda.Code.fromAsset('../services/backend/dist'),
     })
 
     const todoCreateHandler = new lambda.Function(this, 'TodoCreateHandler', {
-      ...commonLambdaProps,
+      runtime,
+      code,
+      memorySize: 256,
+      timeout: cdk.Duration.seconds(10),
+      environment: commonEnv,
       functionName: `todo-create-${environment}`,
       handler: 'todo.createHandler',
-      code: lambda.Code.fromAsset('../services/backend/dist'),
     })
 
     const todoGetHandler = new lambda.Function(this, 'TodoGetHandler', {
-      ...commonLambdaProps,
+      runtime,
+      code,
+      memorySize: 256,
+      timeout: cdk.Duration.seconds(10),
+      environment: commonEnv,
       functionName: `todo-get-${environment}`,
       handler: 'todo.getHandler',
-      code: lambda.Code.fromAsset('../services/backend/dist'),
     })
 
     const todoUpdateHandler = new lambda.Function(this, 'TodoUpdateHandler', {
-      ...commonLambdaProps,
+      runtime,
+      code,
+      memorySize: 256,
+      timeout: cdk.Duration.seconds(10),
+      environment: commonEnv,
       functionName: `todo-update-${environment}`,
       handler: 'todo.updateHandler',
-      code: lambda.Code.fromAsset('../services/backend/dist'),
     })
 
     const todoDeleteHandler = new lambda.Function(this, 'TodoDeleteHandler', {
-      ...commonLambdaProps,
+      runtime,
+      code,
+      memorySize: 256,
+      timeout: cdk.Duration.seconds(10),
+      environment: commonEnv,
       functionName: `todo-delete-${environment}`,
       handler: 'todo.deleteHandler',
-      code: lambda.Code.fromAsset('../services/backend/dist'),
     })
 
     // Grant DynamoDB permissions
